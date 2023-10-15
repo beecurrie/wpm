@@ -1,13 +1,213 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.header {
+  text-align: center;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.center-align {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: black;
+}
+
+.imagePreview {
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+.image-item {
+  display: flex;
+  margin: 10px 0;
+}
+
+.image-item__btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+button {
+  height: 40px;
+}
+
+.loader-container {
+  width: 100%;
+  height: 10vh;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.834);
+  z-index: 1;
+}
+
+.spinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #3d5af1 transparent #3d5af1 transparent;
+  border-radius: 50%;
+  animation: spin-anim 1.2s linear infinite;
+}
+
+/* Login and Registration */
+.logo-signIn {
+  width: 60%;
+  max-width: 100%;
+  height: auto;
+  padding-top: 5%;
+  padding-left: 10%;
+  float: left;
+}
+
+.logo-registration {
+  width: 10px;
+  padding-top: 2%;
+  padding-left: 5%;
+  float: left;
+}
+
+.h1-login {
+  padding-top: 2%;
+  font-size: 2.5em;
+  font-weight: 300;
+  text-align: center;
+  color: white;
+  margin-bottom: 0.5em;
+}
+
+.login-field {
+  padding-top: 10%;
+  padding-right: 10%;
+  width: 40%;
+  height: 100%;
+  float: right;
+}
+
+.reg-field {
+  padding-top: 5%;
+  padding-right: 5%;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.sign-btn {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  text-align: center;
+  width: 100%;
+  color: #366d63 !important;
+}
+
+.forg-password-text {
+  color: white;
+  text-align: start;
+}
+
+.reg-text {
+  color: white;
+  text-align: end;
+}
+
+.label-text {
+  color: white;
+}
+
+.img-preview {
+  float: right;
+  margin-top: -10%;
+  width: 30%;
+  height: auto;
+}
+
+.sign-in-box-left {
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  background-color: #3d5af1;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.sign-in-box-right {
+  margin: 0;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+
+  background-color: #e7e6f2;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.userbox {
+  border-radius: 10px;
+  text-align: center;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.spanerror {
+  font-size: 12px;
+  padding: 3px;
+  color: red;
+  display: none;
+}
+
+input:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+input:invalid[focused="true"] ~ span {
+  display: block;
+}
+
+.bg {
+  /* The image used */
+
+  background-image: url("/public/bg_green.png");
+
+  /* Full height */
+  height: 100%;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: 000000;
+}
+@keyframes spin-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
