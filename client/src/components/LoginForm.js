@@ -34,7 +34,7 @@ export default function LoginForm() {
 
     try {
       // console.log("Entered email and password", enteredEmail, enteredPassword);
-      const response = await axios.post("/api/sos/login", {
+      const response = await axios.post("/api/wpm/login", {
         email: enteredEmail,
         password: enteredPassword,
       });
@@ -62,16 +62,22 @@ export default function LoginForm() {
   return (
     <Container>
       <div className="h1-login">
-        <h1>(SOS)</h1>
-        <h1>Safety Observation System</h1>
+        <h1>(WPM)</h1>
+        <h1>Web-based Password Manager</h1>
       </div>
       <Row style={{ marginTop: "10%" }}>
         <Col className="text-white sign-in-box-left">
           <div style={{ margin: "10px" }}>
-            <img src="../SOS_Logo1.png" alt="Upper right logo" align="left" />
+            <img
+              src="../WPM Security-logos_transparent_1.png"
+              alt="Upper left logo"
+              align="left"
+              width="200"
+              height="50"
+            />
           </div>
 
-          <div style={{ marginTop: "16px" }}>
+          <div style={{ marginTop: "20px" }}>
             <h2>Hey There!</h2>
           </div>
           <div className="mt-5">

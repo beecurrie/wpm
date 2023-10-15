@@ -18,16 +18,24 @@ function NavBar() {
         >
           <Navbar.Brand href="/">
             <div style={{ marginLeft: "10px" }}>
-              <img src="/SOS_Logo1.png" width="50" height="50" alt="SOS Logo" />
+              <img
+                src="/WPM Security-logos_transparent.png"
+                width="100"
+                height="100"
+                alt="SOS Logo"
+              />
             </div>
           </Navbar.Brand>
-          <div className="text-white m-2"> Safety Observation System (SOS)</div>
+          <div className="text-white m-2">
+            {" "}
+            Web-based Password Manager (WPM)
+          </div>
 
           {sosuser && (
             <div className="ms-auto" style={{ marginRight: "10px" }}>
               <img
                 style={{ borderRadius: "50px" }}
-                src={`/api/sos/image/${sosuser.attachment}`}
+                src={`/api/wpm/image/${sosuser.attachment}`}
                 width="50"
                 height="50"
                 alt="User Profile Pix"

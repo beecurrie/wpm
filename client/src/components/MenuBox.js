@@ -17,7 +17,7 @@ function MenuBox(props) {
           width="60"
           height="60"
           className="d-inline-block align-middle"
-          alt="SOS Logo"
+          alt="WPM Logo"
           style={{ marginRight: "5px" }}
         />
         {props.text}

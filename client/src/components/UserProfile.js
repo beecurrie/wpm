@@ -64,7 +64,7 @@ const UserProfile = ({ users }) => {
       {users.map((user, index) => (
         <div className="userbox" key={user.id}>
           <img
-            src={`/api/sos/image/${user.attachment}`}
+            src={`/api/wpm/image/${user.attachment}`}
             style={{
               border: "1px solid #ddd",
               borderRadius: "50%",

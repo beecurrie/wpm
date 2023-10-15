@@ -11,7 +11,6 @@ import Footer from "./Footer";
 
 import UserProfile from "./UserProfile";
 import NavBar from "./NavBar";
-import SideMenu from "./SideMenu";
 
 import { useObservationsContext } from "../hooks/useObservationsContext";
 
@@ -24,7 +23,7 @@ export default function ShowUsers() {
     const fetchUsers = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("/api/sos/allusers");
+        const response = await axios.get("/api/wpm/allusers");
         console.log("Client side: ", response.data);
 
         dispatch({ type: "SET_USERS", payload: response.data }); //now using 'dispatch' for global state management -- 03-Sept-22
@@ -42,9 +41,6 @@ export default function ShowUsers() {
       <NavBar />
       <Container fluid>
         <Row>
-          <Col lg={2}>
-            <SideMenu />
-          </Col>
           <Col>
             <Card style={{ marginTop: "6%" }}>
               <Card.Header className="text-center bg-success text-white">
