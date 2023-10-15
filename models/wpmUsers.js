@@ -21,6 +21,9 @@ const wpmUserSchema = new Schema(
       type: String,
       required: true,
     },
+    attachment: {
+      type: String,
+    },
     admin: { type: Boolean },
     resetPasswordToken: String,
     resetPasswordExpires: Date,

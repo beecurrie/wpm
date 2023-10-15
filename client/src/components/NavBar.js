@@ -3,7 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 function NavBar() {
-  const sosuser = JSON.parse(localStorage.getItem("user"));
+  const wpmuser = JSON.parse(localStorage.getItem("user"));
 
   return (
     <>
@@ -18,12 +18,7 @@ function NavBar() {
         >
           <Navbar.Brand href="/">
             <div style={{ marginLeft: "10px" }}>
-              <img
-                src="/WPM Security-logos_transparent_1.png"
-                width="220"
-                height="50"
-                alt="SOS Logo"
-              />
+              <img src="/WPM_Logo.png" width="220" height="50" alt="SOS Logo" />
             </div>
           </Navbar.Brand>
           <div className="text-white m-2">
@@ -31,12 +26,12 @@ function NavBar() {
             Web-based Password Manager (WPM)
           </div>
 
-          {sosuser && (
+          {wpmuser && (
             <div className="ms-auto" style={{ marginRight: "10px" }}>
               <img
                 style={{ borderRadius: "50px" }}
-                // src={`/api/wpm/image/${sosuser.attachment}`}
-                src="/GAG_Profile.jpg"
+                src={`/api/wpm/image/${wpmuser.attachment}`}
+                // src="/GAG_Profile.jpg"
                 width="50"
                 height="50"
                 alt="User Profile Pix"
@@ -44,7 +39,7 @@ function NavBar() {
             </div>
           )}
           <div className="vr text-white m-2" />
-          {sosuser && <div className="text-white m-2">{sosuser.firstname}</div>}
+          {wpmuser && <div className="text-white m-2">{wpmuser.firstname}</div>}
 
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
           <Navbar.Offcanvas

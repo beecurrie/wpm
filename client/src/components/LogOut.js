@@ -3,7 +3,7 @@ import axios from "axios";
 const LogOut = () => {
   const doLogOut = async () => {
     try {
-      await axios.get("/api/sos/logout");
+      await axios.get("/api/wpm/logout");
       localStorage.setItem("auth", "false");
       localStorage.setItem("user", null);
 

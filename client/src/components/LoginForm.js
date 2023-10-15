@@ -68,7 +68,7 @@ export default function LoginForm() {
         <Col className="text-white sign-in-box-left">
           <div style={{ margin: "10px" }}>
             <img
-              src="../WPM Security-logos_transparent_1.png"
+              src="../WPM_Logo.png"
               alt="Upper left logo"
               align="left"
               width="200"

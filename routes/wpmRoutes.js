@@ -86,8 +86,8 @@ router.post(
     next();
   },
   passport.authenticate("local", {
-    failureRedirect: "/api/sos/login-failure",
-    successRedirect: "/api/sos/login-success",
+    failureRedirect: "/api/wpm/login-failure",
+    successRedirect: "/api/wpm/login-success",
   })
 );
 //Successful login

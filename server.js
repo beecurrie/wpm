@@ -96,7 +96,7 @@ app.use((req, res, next) => {
  * -------------- ROUTES ----------------
  */
 const wpmRoutes = require("./routes/wpmRoutes");
-app.use("/api/wpm", wpmRoutes); //this is the base route: /api/sos
+app.use("/api/wpm", wpmRoutes); //this is the base route: /api/wpm
 
 mongoose
   .connect(DB_URI)

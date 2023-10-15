@@ -21,6 +21,7 @@ const App = () => {
 
       <Route element={<ProtectedRoutes />}>
         <Route path="/" element={<Start />} />
+        <Route path="/dashboard" element={<Start />} />
         <Route path="/logout" element={<LogOut />} />
         <Route
           path="/updateuser"

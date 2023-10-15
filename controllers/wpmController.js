@@ -108,36 +108,6 @@ const updatePWTrans = async (req, res) => {
   res.status(200).json(pwtrans);
 };
 
-// close-out an observation
-const closeObservation = async (req, res) => {
-  console.log("req.body: ", req.body);
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "No such observation" });
-  }
-
-  const observation = await Observation.findOneAndUpdate(
-    { _id: id },
-    {
-      actionTaken: req.body.actionTaken,
-      dateclosed: req.body.dateclosed,
-      status: req.body.status,
-      isResolved: true,
-    },
-    { new: true }
-  );
-
-  if (!observation) {
-    return res.status(400).json({ error: "No such observation" });
-  }
-  req.body._id = id;
-  console.log("close out req.body", req.body);
-  console.log("after update: ", observation);
-
-  res.status(200).json(observation);
-};
-
 /**
  * -------------- SHOW IMAGE CONTROLLER ----------------
  */
@@ -145,7 +115,7 @@ const showImage = (req, res) => {
   // console.log(mongoose.connection.db);
   let gridFSBucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
     chunkSizeBytes: 1024,
-    bucketName: "sosdocs",
+    bucketName: "wpmdocs",
   });
 
   const readstream = gridFSBucket.openDownloadStreamByName(req.params.filename);
@@ -180,6 +150,7 @@ const createUser = async (req, res) => {
       lastname,
       firstname,
       admin: false,
+      attachment: req.fname, //this req.fname was added from the previous middleware
     });
     console.log("new user:", user);
 
@@ -190,7 +161,7 @@ const createUser = async (req, res) => {
         email +
         " and password. \n";
 
-    sendMail(recvr, subject, emailbody); //send welcome email to user
+    // sendMail(recvr, subject, emailbody); //send welcome email to user --> re-activate later when the email address is setup
 
     res.status(200).json({ message: "User created" });
   } catch (error) {

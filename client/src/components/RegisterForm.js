@@ -20,8 +20,6 @@ export default function RegisterForm() {
   const formRePasswordRef = useRef();
   const formLastnameRef = useRef();
   const formFirstnameRef = useRef();
-  const formCompanyRef = useRef();
-  const formPositionRef = useRef();
 
   const [error, setError] = useState(null);
   const [file, setFile] = useState("");
@@ -40,7 +38,7 @@ export default function RegisterForm() {
     setFocused(true);
     setErrorMessage("Invalid email");
     try {
-      const response = await axios.get("/api/sos/user/" + e.target.value);
+      const response = await axios.get("/api/wpm/user/" + e.target.value);
 
       if (response.data.duplicate) {
         e.target.setCustomValidity("Invalid field."); //forcefully set the :invalid pseudo CSS
@@ -214,30 +212,6 @@ export default function RegisterForm() {
                       type="text"
                       placeholder="lastname"
                       ref={formLastnameRef}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg={true}>
-                  <Form.Group className="mb-3" controlId="formCompany">
-                    <Form.Label>Company</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="company"
-                      ref={formCompanyRef}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-                <Col lg={true}>
-                  <Form.Group className="mb-3" controlId="formPosition">
-                    <Form.Label>Position</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="position"
-                      ref={formPositionRef}
                       required
                     />
                   </Form.Group>
