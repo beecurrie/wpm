@@ -129,7 +129,7 @@ export default function RegisterForm() {
           <Nav.Link href="/">
             <div className="logo-registration">
               <img
-                src="../WPM Security-logos_transparent_1.png"
+                src="../WPM_Logo.png"
                 alt="Upper left logo"
                 align="left"
                 width="200"

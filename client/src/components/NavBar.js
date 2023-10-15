@@ -14,11 +14,11 @@ function NavBar() {
           variant="dark"
           expand={expand}
           className="mb-2"
-          style={{ position: "fixed", zIndex: 1, width: "100%" }}
+          // style={{ position: "fixed", zIndex: 1, width: "100%" }}
         >
           <Navbar.Brand href="/">
             <div style={{ marginLeft: "10px" }}>
-              <img src="/WPM_Logo.png" width="220" height="50" alt="SOS Logo" />
+              <img src="/WPM_Logo.png" width="220" height="50" alt="WPM Logo" />
             </div>
           </Navbar.Brand>
           <div className="text-white m-2">
@@ -31,7 +31,6 @@ function NavBar() {
               <img
                 style={{ borderRadius: "50px" }}
                 src={`/api/wpm/image/${wpmuser.attachment}`}
-                // src="/GAG_Profile.jpg"
                 width="50"
                 height="50"
                 alt="User Profile Pix"
