@@ -62,7 +62,6 @@ export default function LoginForm() {
   return (
     <Container>
       <div className="h1-login">
-        <h1>(WPM)</h1>
         <h1>Web-based Password Manager</h1>
       </div>
       <Row style={{ marginTop: "10%" }}>

@@ -19,9 +19,9 @@ function NavBar() {
           <Navbar.Brand href="/">
             <div style={{ marginLeft: "10px" }}>
               <img
-                src="/WPM Security-logos_transparent.png"
-                width="100"
-                height="100"
+                src="/WPM Security-logos_transparent_1.png"
+                width="220"
+                height="50"
                 alt="SOS Logo"
               />
             </div>
@@ -35,7 +35,8 @@ function NavBar() {
             <div className="ms-auto" style={{ marginRight: "10px" }}>
               <img
                 style={{ borderRadius: "50px" }}
-                src={`/api/wpm/image/${sosuser.attachment}`}
+                // src={`/api/wpm/image/${sosuser.attachment}`}
+                src="/GAG_Profile.jpg"
                 width="50"
                 height="50"
                 alt="User Profile Pix"

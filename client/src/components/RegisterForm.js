@@ -88,8 +88,6 @@ export default function RegisterForm() {
     const enteredPassword = formPasswordRef.current.value;
     const enteredLastname = formLastnameRef.current.value;
     const enteredFirstname = formFirstnameRef.current.value;
-    const enteredCompany = formCompanyRef.current.value;
-    const enteredPosition = formPositionRef.current.value;
 
     //Create Formdata - did this due to the addition of file in the submission of data
     const formData = new FormData();
@@ -97,12 +95,11 @@ export default function RegisterForm() {
     formData.append("password", enteredPassword);
     formData.append("lastname", enteredLastname);
     formData.append("firstname", enteredFirstname);
-    formData.append("company", enteredCompany);
-    formData.append("position", enteredPosition);
+
     formData.append("file", file);
 
     try {
-      const response = await axios.post("/api/sos/register", formData, {
+      const response = await axios.post("/api/wpm/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -133,14 +130,19 @@ export default function RegisterForm() {
         <Nav.Item>
           <Nav.Link href="/">
             <div className="logo-registration">
-              <img src="../SOS_Logo1.png" alt="Upper right logo" />
+              <img
+                src="../WPM Security-logos_transparent_1.png"
+                alt="Upper left logo"
+                align="left"
+                width="200"
+                height="50"
+              />
             </div>
           </Nav.Link>
         </Nav.Item>
 
         <div className="h1-login">
-          <h1>(SOS)</h1>
-          <h1>Safety Observation System</h1>
+          <h1>Web-based Password Manager</h1>
         </div>
 
         <Card>
