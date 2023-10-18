@@ -81,33 +81,17 @@ function PasswordForm() {
     const enteredUrl = formUrlRef.current.value;
     const enteredRemarks = formRemarksRef.current.value;
 
-    //Create Formdata - did this due to the addition of file in the submission of data
-    const formData = new FormData();
-    formData.append("username", enteredUsername);
-    formData.append("password", enteredPassword);
-    formData.append("url", enteredUrl);
-    formData.append("remarks", enteredRemarks);
-    console.log(formData);
-
-    // formData.append("file", file);
+    const formData = {
+      username: enteredUsername,
+      password: enteredPassword,
+      url: enteredUrl,
+      remarks: enteredRemarks,
+    };
 
     try {
-      //   const response = await axios.post("/api/wpm/register", formData, {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //     onUploadProgress: (progressEvent) => {
-      //       setUploadPercentage(
-      //         parseInt(
-      //           Math.round((progressEvent.loaded * 100) / progressEvent.total)
-      //         )
-      //       );
-      //     },
-      //   });
+      const response = await axios.post("/api/wpm", formData);
 
-      //   const { fileName, filePath } = response.data;
-
-      //   setUploadedFile({ fileName, filePath });
+      console.log(response.data);
 
       setMessage("New record saved");
       navigate("/", { replace: true });

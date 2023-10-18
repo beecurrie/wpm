@@ -1,4 +1,5 @@
 const moment = require("moment");
+const crypto = require("crypto");
 
 const mongoose = require("mongoose");
 
@@ -8,7 +9,6 @@ const Users = require("../models/wpmUsers");
 
 const bcrypt = require("bcrypt");
 const async = require("async");
-const crypto = require("crypto");
 
 const { sendMail } = require("../helpers/gaglib");
 
@@ -42,19 +42,56 @@ const getPassword = async (req, res) => {
 
 // create a new password record
 const createPWTrans = async (req, res) => {
+  // console.log("req.body", req.body);
   const { username, password, url, remarks } = req.body;
+  console.log("from middleware: ", req.user);
+
+  //TO DO: Use crypto module to encrypt and decrypt password. Do not use hashing as this is only one way.
+  // 'crypto' module will require a 'secret key' to encrypt and decrypt. Use the stored encrypted login password of the user as the secret key for all
+  // password entries - DONE! - 19-Oct-2023
 
   // add to the database
   // encrypt password first before saving into the database
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // const hashedPassword = await bcrypt.hash(password, 10);
+
+  // encrypted text
+  // const encryptedText = "9e1c8f8bbb7f9e2ed2d7c3f3f1e7c3e9";
+
+  // plain text
+  const plainText = password; //from client taken from req.body.password
+  console.log(plainText);
+
+  // encryption key
+  const key = req.user.password;
+  console.log("key: ", key);
+
+  // encryption algorithm
+  const algorithm = "aes-256-cbc";
+
+  // create a cipher object
+  const cipher = crypto.createCipher(algorithm, key);
+
+  // encrypt the plain text
+  let encrypted = cipher.update(plainText, "utf8", "hex");
+  encrypted += cipher.final("hex");
+  console.log(encrypted);
+
+  // create a decipher object
+  // const decipher = crypto.createDecipher(algorithm, key);
+
+  // decrypt the encrypted text
+  // let decrypted = decipher.update(encryptedText, "hex", "utf8");
+  // decrypted += decipher.final("utf8");
+  // console.log(decrypted);
+
   try {
     const pwtrans = await Passwords.create({
       username,
-      password: hashedPassword,
+      password: encrypted,
       url,
       remarks,
     });
-
+    console.log("pwtrans: ", pwtrans);
     res.status(200).json(pwtrans);
   } catch (error) {
     res.status(400).json({ error: error.message });
