@@ -17,10 +17,35 @@ const { sendMail } = require("../helpers/gaglib");
  */
 
 // get all password list
+const decryptPassword = (password) => {
+  console.log(decrypted);
+};
+
 const getPasswords = async (req, res) => {
-  const passwords = await Passwords.find({}).sort({ createdAt: -1 });
-  console.log("server side: ", passwords);
-  res.status(200).json(passwords);
+  const { id } = req.params;
+  const passwords = await Passwords.find({ owner: id }).sort({ createdAt: -1 });
+
+  const decryptedList = passwords.map((pw) => {
+    // encryption key
+    const key = req.user.password;
+
+    // encryption algorithm
+    const algorithm = "aes-256-cbc";
+
+    // create a decipher object
+    const decipher = crypto.createDecipher(algorithm, key);
+    let decrypted = decipher.update(pw.password, "hex", "utf8");
+    decrypted += decipher.final("utf8");
+    return {
+      owner: pw.owner,
+      username: pw.username,
+      password: decrypted,
+      url: pw.url,
+      remarks: pw.remarks,
+    };
+  });
+  console.log("server side: ", decryptedList);
+  res.status(200).json(decryptedList);
 };
 
 // get a single observation
@@ -52,10 +77,6 @@ const createPWTrans = async (req, res) => {
 
   // add to the database
   // encrypt password first before saving into the database
-  // const hashedPassword = await bcrypt.hash(password, 10);
-
-  // encrypted text
-  // const encryptedText = "9e1c8f8bbb7f9e2ed2d7c3f3f1e7c3e9";
 
   // plain text
   const plainText = password; //from client taken from req.body.password
@@ -76,16 +97,9 @@ const createPWTrans = async (req, res) => {
   encrypted += cipher.final("hex");
   console.log(encrypted);
 
-  // create a decipher object
-  // const decipher = crypto.createDecipher(algorithm, key);
-
-  // decrypt the encrypted text
-  // let decrypted = decipher.update(encryptedText, "hex", "utf8");
-  // decrypted += decipher.final("utf8");
-  // console.log(decrypted);
-
   try {
     const pwtrans = await Passwords.create({
+      owner: req.user.email,
       username,
       password: encrypted,
       url,

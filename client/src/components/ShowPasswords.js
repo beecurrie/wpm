@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { useObservationsContext } from "../hooks/useObservationsContext";
+import { usePasswordsContext } from "../hooks/usePasswordsContext";
 
 import axios from "axios";
 
@@ -17,7 +17,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 export default function ShowObservations() {
-  const { observations, dispatch } = useObservationsContext();
+  const { observations, dispatch } = usePasswordsContext();
 
   const [isLoading, setIsLoading] = useState(false);
 

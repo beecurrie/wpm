@@ -1,51 +1,95 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 import PasswordForm from "./PasswordForm";
 
-const handleClick = (e) => {
-  e.preventDefault();
-  console.log("click", e);
-};
+import { usePasswordsContext } from "../hooks/usePasswordsContext";
+import Button from "react-bootstrap/esm/Button";
 
 function PasswordList() {
+  const { passwords, dispatch } = usePasswordsContext();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    const fetchPasswords = async () => {
+      setIsLoading(true);
+      try {
+        const email = JSON.parse(localStorage.getItem("user")).email;
+        console.log(email);
+        const response = await axios.get("/api/wpm/allpasswords/" + email);
+        console.log("Client side: ", response.data);
+
+        dispatch({ type: "SET_PASSWORDS", payload: response.data }); //now using 'dispatch' for global state management -- 19-Oct-23
+      } catch (err) {
+        console.log(err);
+      }
+      setIsLoading(false);
+    };
+
+    fetchPasswords();
+  }, [dispatch]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Container>
-      <PasswordForm />
-      <Table striped>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>URL</th>
-            <th>Remarks</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>gag@gmail.com</td>
-            <td>password123</td>
-            <td>www.testsite.co.nz</td>
-            <td>This is a test password</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>gag1@gmail.com</td>
-            <td>password123</td>
-            <td>www.testsite.co.nz</td>
-            <td>This is a test password</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>gag2@gmail.com</td>
-            <td>password123</td>
-            <td>www.testsite.co.nz</td>
-            <td>This is a test password</td>
-          </tr>
-        </tbody>
-      </Table>
+      <Row>
+        <Col>
+          <PasswordForm />
+        </Col>
+        <Col>
+          <Button
+            onClick={handleClick}
+            style={{ margin: 10, float: "right" }}
+            variant="warning"
+          >
+            {showPassword ? "Hide" : "Show"} Passwords
+          </Button>
+        </Col>
+      </Row>
+
+      {isLoading ? (
+        <div className="loader-container">
+          <div className="spinner"></div>
+        </div>
+      ) : (
+        <Table striped>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username </th>
+              <th>Password</th>
+              <th>URL</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {passwords &&
+              passwords.map((pw, idx) => {
+                return (
+                  <tr>
+                    <td>{idx + 1}</td>
+                    <td>{pw.username}</td>
+                    <td>{showPassword ? pw.password : "************"}</td>
+                    <td>{pw.url}</td>
+                    <td>{pw.remarks}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </Table>
+      )}
     </Container>
   );
 }

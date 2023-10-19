@@ -194,7 +194,7 @@ router.get("/logout", (req, res, next) => {
 //Password transaction routes
 
 //Get list of all passwords
-router.get("/allpasswords", isAuth, getPasswords);
+router.get("/allpasswords/:id", isAuth, getPasswords);
 
 // GET a single password transaction
 router.get("/:id", isAuth, getPassword);

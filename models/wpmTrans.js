@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const wpmSchema = new Schema(
   {
+    owner: {
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,

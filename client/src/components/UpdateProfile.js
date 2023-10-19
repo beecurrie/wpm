@@ -15,7 +15,7 @@ import Footer from "./Footer";
 
 import Message from "./Message";
 import Progress from "./Progress";
-import { useObservationsContext } from "../hooks/useObservationsContext";
+import { usePasswordsContext } from "../hooks/usePasswordsContext";
 import { auto } from "async";
 
 export default function UpdateProfile({
@@ -37,7 +37,7 @@ export default function UpdateProfile({
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
-  const { usersList, dispatch } = useObservationsContext(); //using global state management via context
+  const { usersList, dispatch } = usePasswordsContext(); //using global state management via context
 
   const onChange = (e) => {
     setFile(e.target.files[0]);

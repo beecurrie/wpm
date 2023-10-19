@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useObservationsContext } from "../hooks/useObservationsContext";
+import { usePasswordsContext } from "../hooks/usePasswordsContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEraser } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +12,7 @@ import Button from "react-bootstrap/Button";
 import UpdateProfile from "./UpdateProfile";
 
 const UserProfile = ({ users }) => {
-  const { dispatch } = useObservationsContext();
+  const { dispatch } = usePasswordsContext();
   const [profile, setProfile] = useState(false);
 
   const [obsid, setObsId] = useState("");

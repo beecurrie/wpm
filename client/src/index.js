@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 
 import App from "./App";
-import { ObservationsContextProvider } from "./context/ObservationsContext";
+import { PasswordsContextProvider } from "./context/PasswordsContext";
 
 // Importing the Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,7 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 ReactDOM.render(
-  <ObservationsContextProvider>
+  <PasswordsContextProvider>
     <BrowserRouter>
       <ThemeProvider
         breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
@@ -21,6 +21,6 @@ ReactDOM.render(
         <App />
       </ThemeProvider>
     </BrowserRouter>
-  </ObservationsContextProvider>,
+  </PasswordsContextProvider>,
   document.getElementById("root")
 );

@@ -12,12 +12,12 @@ import Footer from "./Footer";
 import UserProfile from "./UserProfile";
 import NavBar from "./NavBar";
 
-import { useObservationsContext } from "../hooks/useObservationsContext";
+import { usePasswordsContext } from "../hooks/usePasswordsContext";
 
 export default function ShowUsers() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { usersList, dispatch } = useObservationsContext();
+  const { usersList, dispatch } = usePasswordsContext();
 
   useEffect(() => {
     const fetchUsers = async () => {
