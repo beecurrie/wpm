@@ -8,7 +8,11 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+import { usePasswordsContext } from "../hooks/usePasswordsContext";
+
 function PasswordForm() {
+  const { passwords, dispatch } = usePasswordsContext();
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -90,6 +94,7 @@ function PasswordForm() {
 
     try {
       const response = await axios.post("/api/wpm", formData);
+      dispatch({ type: "CREATE_PASSWORD", payload: response.data }); //now using 'dispatch' for global state management -- 19-Oct-23
 
       console.log(response.data);
 
