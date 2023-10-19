@@ -17,9 +17,6 @@ const { sendMail } = require("../helpers/gaglib");
  */
 
 // get all password list
-const decryptPassword = (password) => {
-  console.log(decrypted);
-};
 
 const getPasswords = async (req, res) => {
   const { id } = req.params;
@@ -98,13 +95,14 @@ const createPWTrans = async (req, res) => {
   console.log(encrypted);
 
   try {
-    const pwtrans = await Passwords.create({
+    let pwtrans = await Passwords.create({
       owner: req.user.email,
       username,
       password: encrypted,
       url,
       remarks,
     });
+    pwtrans.password = plainText; //return the plain text to client similar to the getPasswords() code
     console.log("pwtrans: ", pwtrans);
     res.status(200).json(pwtrans);
   } catch (error) {
