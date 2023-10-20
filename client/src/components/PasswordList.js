@@ -23,9 +23,9 @@ function PasswordList() {
       setIsLoading(true);
       try {
         const email = JSON.parse(localStorage.getItem("user")).email;
-        console.log(email);
+        // console.log(email);
         const response = await axios.get("/api/wpm/allpasswords/" + email);
-        console.log("Client side: ", response.data);
+        // console.log("Client side: ", response.data);
 
         dispatch({ type: "SET_PASSWORDS", payload: response.data }); //now using 'dispatch' for global state management -- 19-Oct-23
       } catch (err) {
@@ -78,7 +78,7 @@ function PasswordList() {
             {passwords &&
               passwords.map((pw, idx) => {
                 return (
-                  <tr>
+                  <tr key={idx}>
                     <td>{idx + 1}</td>
                     <td>{pw.username}</td>
                     <td>{showPassword ? pw.password : "************"}</td>

@@ -1,5 +1,6 @@
 const moment = require("moment");
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 
 const mongoose = require("mongoose");
 
@@ -11,6 +12,15 @@ const bcrypt = require("bcrypt");
 const async = require("async");
 
 const { sendMail } = require("../helpers/gaglib");
+
+//JWT - create JSON Web Token
+const createToken = (_id, email, lastname, firstname) => {
+  return jwt.sign(
+    { _id, email, lastname, firstname },
+    process.env.SESSION_SECRET,
+    { expiresIn: "1d" }
+  );
+};
 
 /**
  * -------------- OBSERVATION CONTROLLERS ----------------
@@ -191,30 +201,53 @@ const createUser = async (req, res) => {
   const { email, password, lastname, firstname } = req.body;
 
   // add to the database
+  // try {
+  //   const hashedPassword = await bcrypt.hash(password, 10);
+  //   const user = await Users.create({
+  //     email,
+  //     password: hashedPassword,
+  //     lastname,
+  //     firstname,
+  //     admin: false,
+  //     attachment: req.fname, //this req.fname was added from the previous middleware
+  //   });
+  //   console.log("new user:", user);
+
+  //   var recvr = email,
+  //     subject = "Welcome " + firstname,
+  //     emailbody =
+  //       "Registration successful. You may now access the app by going to this url: https://wpm.herokuapp.com and use your username: " +
+  //       email +
+  //       " and password. \n";
+
+  //   // sendMail(recvr, subject, emailbody); //send welcome email to user --> re-activate later when the email address is setup
+
+  //   res.status(200).json({ message: "User created" });
+  // } catch (error) {
+  //   console.log(error.message);
+  //   res.status(400).json({ error: error.message });
+  //   // res.redirect("/register");
+  // }
+
+  // Changes 21-Oct-2023:
+  // 1. Used Mongoose Static functions. Modified Users model to include static functions for creating a user and logging-in a user
+  // 2. Used JSON Web Token (JWT) to return the created user. We'll be using this moving forward as part of the authentication process
+
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await Users.create({
+    const user = await Users.signup(
       email,
-      password: hashedPassword,
+      password,
       lastname,
       firstname,
-      admin: false,
-      attachment: req.fname, //this req.fname was added from the previous middleware
-    });
-    console.log("new user:", user);
-
-    var recvr = email,
-      subject = "Welcome " + firstname,
-      emailbody =
-        "Registration successful. You may now access the app by going to this url: https://wpm.herokuapp.com and use your username: " +
-        email +
-        " and password. \n";
-
-    // sendMail(recvr, subject, emailbody); //send welcome email to user --> re-activate later when the email address is setup
-
-    res.status(200).json({ message: "User created" });
+      req.fname //attachment field
+    );
+    //create token
+    // _id, email, lastname, firstname
+    const token = createToken(user._id, email, lastname, firstname);
+    console.log(token);
+    res.status(200).json({ email, token });
   } catch (error) {
-    res.redirect("/register");
+    res.status(400).json({ error: error.message });
   }
 };
 

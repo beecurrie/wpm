@@ -23,9 +23,8 @@ export default function RegisterForm() {
 
   const [error, setError] = useState(null);
   const [file, setFile] = useState("");
-  const [filepreview, setFilePreview] = useState("");
+  const [filepreview, setFilePreview] = useState(null);
 
-  const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
@@ -65,16 +64,7 @@ export default function RegisterForm() {
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
-
-    setFilePreview(URL.createObjectURL(e.target.files[0]));
-
-    // Image preview
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      reader.readAsDataURL(e.target.files[0]);
-
-      return true;
-    };
+    setFilePreview(URL.createObjectURL(e.target.files[0])); //this stuffs the filePreview state variable which is then used as the img src in the preview section
   };
 
   const navigate = useNavigate();
@@ -110,11 +100,8 @@ export default function RegisterForm() {
         },
       });
 
-      const { fileName, filePath } = response.data;
+      console.log("response: ", response.data);
 
-      setUploadedFile({ fileName, filePath });
-
-      setMessage("File Uploaded");
       navigate("/", { replace: true });
     } catch (err) {
       console.log(err);
@@ -125,7 +112,7 @@ export default function RegisterForm() {
   return (
     <div>
       <Container>
-        <Nav.Item style={{backgroundColor: "black"}}>
+        <Nav.Item style={{ backgroundColor: "black" }}>
           <Nav.Link href="/">
             <div className="logo-registration">
               <img
@@ -140,10 +127,10 @@ export default function RegisterForm() {
         </Nav.Item>
 
         <div className="h1-login">
-          <h1>Web-based Password Manager</h1> 
+          <h1>Web-based Password Manager</h1>
         </div>
 
-        <Card style={{backgroundColor: "#759EB8"}}>
+        <Card style={{ backgroundColor: "#759EB8" }}>
           <Card.Header className="card-header text-center text-black">
             <h3>User Registration</h3>
           </Card.Header>
@@ -152,21 +139,21 @@ export default function RegisterForm() {
             <Form onSubmit={submitHandler}>
               <Row>
                 <Col lg={5}>
-                    <Form.Group className="mb-3" controlId="formEmail">
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control
-                        type="email"
-                        placeholder="email"
-                        ref={formEmailRef}
-                        required
-                        onBlur={handleFocus}
-                        focused={focused.toString()}
-                      />
-                      <span className="spanerror">{errorMessage}</span>
-                    </Form.Group>
-                  </Col>
-                  <Col lg={2}></Col>
-                  <Col lg={5}>
+                  <Form.Group className="mb-3" controlId="formEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="email"
+                      ref={formEmailRef}
+                      required
+                      onBlur={handleFocus}
+                      focused={focused.toString()}
+                    />
+                    <span className="spanerror">{errorMessage}</span>
+                  </Form.Group>
+                </Col>
+                <Col lg={2}></Col>
+                <Col lg={5}>
                   <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Upload Photo</Form.Label>
                     <Form.Control type="file" onChange={onChange} required />
@@ -174,7 +161,7 @@ export default function RegisterForm() {
                 </Col>
               </Row>
               <Row>
-              <Col lg={5}>
+                <Col lg={5}>
                   <Form.Group className="mb-3" controlId="formPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -188,7 +175,7 @@ export default function RegisterForm() {
                 </Col>
                 <Col lg={2}></Col>
                 <Col lg={5}>
-                  {uploadedFile ? (
+                  {filepreview && (
                     <div className="mt-4">
                       <img
                         src={filepreview}
@@ -201,57 +188,61 @@ export default function RegisterForm() {
                         alt="preview"
                       />
                     </div>
-                  ) : null}
+                  )}
                 </Col>
               </Row>
               <Row>
                 <Col lg={5}>
-                    <Form.Group className="mb-3" controlId="formRePassword">
-                      <Form.Label>Re-type Password</Form.Label>
-                      <Form.Control
-                        type="password"
-                        placeholder="Re-type password"
-                        ref={formRePasswordRef}
-                        pattern={password.val}
-                        onBlur={checkPassword}
-                        focused={focused.toString()}
-                        required
-                      />
-                      <span className="spanerror">{passwordMessage}</span>
-                    </Form.Group>
-                  </Col>
-              </Row>
-              <Row>
-                <Col lg={5}>
-                    <Form.Group className="mb-3" controlId="formFirstname">
-                      <Form.Label>Firstname</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="firstname"
-                        ref={formFirstnameRef}
-                        required
-                      />
-                    </Form.Group>
+                  <Form.Group className="mb-3" controlId="formRePassword">
+                    <Form.Label>Re-type Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Re-type password"
+                      ref={formRePasswordRef}
+                      pattern={password.val}
+                      onBlur={checkPassword}
+                      focused={focused.toString()}
+                      required
+                    />
+                    <span className="spanerror">{passwordMessage}</span>
+                  </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col lg={5}>
-                    <Form.Group className="mb-3" controlId="formLastname">
-                      <Form.Label>Lastname</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="lastname"
-                        ref={formLastnameRef}
-                        required
-                      />
-                    </Form.Group>
+                  <Form.Group className="mb-3" controlId="formFirstname">
+                    <Form.Label>Firstname</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="firstname"
+                      ref={formFirstnameRef}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={5}>
+                  <Form.Group className="mb-3" controlId="formLastname">
+                    <Form.Label>Lastname</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="lastname"
+                      ref={formLastnameRef}
+                      required
+                    />
+                  </Form.Group>
                 </Col>
                 <Col lg={2}></Col>
                 <Col lg={5}>
                   <Progress percentage={uploadPercentage} />
-                    {error}
+                  {error}
                   <div className="mt-3 d-grid">
-                    <Button variant="light" type="submit" style={{backgroundColor: "#B3C5D7"}}>
+                    <Button
+                      variant="light"
+                      type="submit"
+                      style={{ backgroundColor: "#B3C5D7" }}
+                    >
                       Submit
                     </Button>
                   </div>

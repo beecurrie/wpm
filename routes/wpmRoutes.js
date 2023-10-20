@@ -65,7 +65,7 @@ const savePhotoDb = async (req, res, next) => {
       res.send(error);
     })
     .on("finish", () => {
-      console.log("done saving to mongoDB");
+      console.log("done saving image to mongoDB");
 
       req.fname = fname.slice(14, fname.length); //stuff the 'req' object with the filename (fname.slice(14, fname.length)) as this is needed
       //in the saving of the rest of req.body from the client. This (req.fname) goes to the 'attachment' field
