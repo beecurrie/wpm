@@ -66,6 +66,7 @@ wpmUserSchema.statics.signup = async function (
     lastname,
     firstname,
     attachment,
+    admin: false,
   });
 
   return user;
