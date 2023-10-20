@@ -72,8 +72,8 @@ export default function ChangePassword() {
               <div className="ms-auto text-danger">{errorMessage}</div>
             )}
           </div>
-          <Card>
-            <Card.Header className="bg-primary text-center text-white">
+          <Card style={{backgroundColor: "#759EB8"}}>
+            <Card.Header className="card-header text-center text-black">
               <h3>Change Password</h3>
             </Card.Header>
             <Card.Body>
@@ -122,15 +122,17 @@ export default function ChangePassword() {
                   </Form.Group>
                 </Col>
 
-                <Row>
-                  <Col>
+                <Row className="mt-5">
+                  <Col sm={6}></Col>
+                  <Col sm={6}>
                     <div className="d-grid">
                       <Button
                         style={{
                           padding: "8px",
                           borderRadius: "15px",
+                          backgroundColor: "#B3C5D7",
                         }}
-                        variant="primary"
+                        variant="light"
                         type="submit"
                       >
                         Submit
