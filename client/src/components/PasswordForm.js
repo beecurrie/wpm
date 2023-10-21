@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { Breakpoint } from "react-socks"; //added: 21-Oct-23 by GAG
+
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -109,9 +111,16 @@ function PasswordForm() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} style={{ margin: 10 }}>
-        New Password
-      </Button>
+      <Breakpoint small down>
+        <Button variant="primary" onClick={handleShow} style={{ margin: 10 }}>
+          New
+        </Button>
+      </Breakpoint>
+      <Breakpoint medium up>
+        <Button variant="primary" onClick={handleShow} style={{ margin: 10 }}>
+          New Password
+        </Button>
+      </Breakpoint>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

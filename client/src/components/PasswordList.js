@@ -52,13 +52,24 @@ function PasswordList() {
           <PasswordForm />
         </Col>
         <Col>
-          <Button
-            onClick={handleClick}
-            style={{ margin: 10, float: "right" }}
-            variant="warning"
-          >
-            {showPassword ? "Hide" : "Show"} Passwords
-          </Button>
+          <Breakpoint small down>
+            <Button
+              onClick={handleClick}
+              style={{ margin: 10, float: "right" }}
+              variant="warning"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </Button>
+          </Breakpoint>
+          <Breakpoint medium up>
+            <Button
+              onClick={handleClick}
+              style={{ margin: 10, float: "right" }}
+              variant="warning"
+            >
+              {showPassword ? "Hide" : "Show"} Passwords
+            </Button>
+          </Breakpoint>
         </Col>
       </Row>
 
