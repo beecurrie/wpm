@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
+import { BreakpointProvider } from "react-socks"; //added: 21-Oct-23 by GAG
 
 import App from "./App";
 import { PasswordsContextProvider } from "./context/PasswordsContext";
@@ -18,7 +19,9 @@ ReactDOM.render(
         breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
         minBreakpoint="xl"
       >
-        <App />
+        <BreakpointProvider>
+          <App />
+        </BreakpointProvider>
       </ThemeProvider>
     </BrowserRouter>
   </PasswordsContextProvider>,

@@ -13,9 +13,6 @@ function Start() {
         <Row>
           <PasswordList />
         </Row>
-        <footer>
-          <Footer />
-        </footer>
       </Container>
     </>
   );

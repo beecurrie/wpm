@@ -2,10 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { Breakpoint } from "react-socks"; //added: 21-Oct-23 by GAG
+
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 import PasswordForm from "./PasswordForm";
 
@@ -64,31 +67,56 @@ function PasswordList() {
           <div className="spinner"></div>
         </div>
       ) : (
-        <Table striped>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Username </th>
-              <th>Password</th>
-              <th>URL</th>
-              <th>Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div>
+          <Breakpoint small down>
             {passwords &&
               passwords.map((pw, idx) => {
                 return (
-                  <tr key={idx}>
-                    <td>{idx + 1}</td>
-                    <td>{pw.username}</td>
-                    <td>{showPassword ? pw.password : "************"}</td>
-                    <td>{pw.url}</td>
-                    <td>{pw.remarks}</td>
-                  </tr>
+                  <Card style={{ width: "28rem", marginBottom: 5 }} key={idx}>
+                    <Card.Body>
+                      <Card.Title>
+                        {idx + 1}. Username: {pw.username}
+                      </Card.Title>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        Password: {showPassword ? pw.password : "************"}
+                      </Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        URL: {pw.url}
+                      </Card.Subtitle>
+                      <Card.Text>Remarks: {pw.remarks}</Card.Text>
+                    </Card.Body>
+                  </Card>
                 );
               })}
-          </tbody>
-        </Table>
+          </Breakpoint>
+          <Breakpoint large up>
+            <Table striped>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Username </th>
+                  <th>Password</th>
+                  <th>URL</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                {passwords &&
+                  passwords.map((pw, idx) => {
+                    return (
+                      <tr key={idx}>
+                        <td>{idx + 1}</td>
+                        <td>{pw.username}</td>
+                        <td>{showPassword ? pw.password : "************"}</td>
+                        <td>{pw.url}</td>
+                        <td>{pw.remarks}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </Table>
+          </Breakpoint>
+        </div>
       )}
     </Container>
   );

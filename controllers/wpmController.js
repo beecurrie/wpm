@@ -51,7 +51,7 @@ const getPasswords = async (req, res) => {
       remarks: pw.remarks,
     };
   });
-  console.log("server side: ", decryptedList);
+  // console.log("server side: ", decryptedList);
   res.status(200).json(decryptedList);
 };
 
@@ -76,7 +76,7 @@ const getPassword = async (req, res) => {
 const createPWTrans = async (req, res) => {
   // console.log("req.body", req.body);
   const { username, password, url, remarks } = req.body;
-  console.log("from middleware: ", req.user);
+  // console.log("from middleware: ", req.user);
 
   //TO DO: Use crypto module to encrypt and decrypt password. Do not use hashing as this is only one way.
   // 'crypto' module will require a 'secret key' to encrypt and decrypt. Use the stored encrypted login password of the user as the secret key for all
@@ -87,11 +87,11 @@ const createPWTrans = async (req, res) => {
 
   // plain text
   const plainText = password; //from client taken from req.body.password
-  console.log(plainText);
+  // console.log(plainText);
 
   // encryption key
   const key = req.user.password;
-  console.log("key: ", key);
+  // console.log("key: ", key);
 
   // encryption algorithm
   const algorithm = "aes-256-cbc";
@@ -102,7 +102,7 @@ const createPWTrans = async (req, res) => {
   // encrypt the plain text
   let encrypted = cipher.update(plainText, "utf8", "hex");
   encrypted += cipher.final("hex");
-  console.log(encrypted);
+  // console.log(encrypted);
 
   try {
     let pwtrans = await Passwords.create({
@@ -113,7 +113,7 @@ const createPWTrans = async (req, res) => {
       remarks,
     });
     pwtrans.password = plainText; //return the plain text to client similar to the getPasswords() code
-    console.log("pwtrans: ", pwtrans);
+    // console.log("pwtrans: ", pwtrans);
     res.status(200).json(pwtrans);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -139,7 +139,7 @@ const deletePwTrans = async (req, res) => {
 
 // update a password tranaction
 const updatePWTrans = async (req, res) => {
-  console.log("req.body: ", req.body);
+  // console.log("req.body: ", req.body);
   const { id } = req.params;
   const { username, password, url, remarks } = req.body;
 
@@ -161,8 +161,8 @@ const updatePWTrans = async (req, res) => {
     return res.status(400).json({ error: "No such password transaction" });
   }
   req.body._id = id;
-  console.log(req.body);
-  console.log(pwtrans);
+  // console.log(req.body);
+  // console.log(pwtrans);
 
   res.status(200).json(pwtrans);
 };
@@ -241,8 +241,8 @@ const createUser = async (req, res) => {
       firstname,
       req.fname //attachment field
     );
+
     //create token
-    // _id, email, lastname, firstname
     const token = createToken(user._id, email, lastname, firstname);
     console.log(token);
     res.status(200).json({ email, token });
@@ -265,7 +265,7 @@ const updateUser = async (req, res) => {
       { new: true }
     );
     const updateduser = {
-      id: users.id,
+      id: user.id,
       email: user.email,
       lastname: user.lastname,
       firstname: user.firstname,
