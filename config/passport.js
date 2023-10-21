@@ -21,10 +21,10 @@ const verifyCallback = (username, password, done) => {
       const isValid = bcrypt.compareSync(password, user.password);
 
       if (isValid) {
-        console.log("Yehey valid!");
+        // console.log("Yehey valid!");
         return done(null, user);
       } else {
-        console.log("Invalid!");
+        // console.log("Invalid!");
         return done(null, false);
       }
     })
