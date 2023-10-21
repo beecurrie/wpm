@@ -72,7 +72,7 @@ function PasswordList() {
             {passwords &&
               passwords.map((pw, idx) => {
                 return (
-                  <Card style={{ width: "28rem", marginBottom: 5 }} key={idx}>
+                  <Card style={{ marginBottom: 5 }} key={idx}>
                     <Card.Body>
                       <Card.Title>
                         {idx + 1}. Username: {pw.username}
