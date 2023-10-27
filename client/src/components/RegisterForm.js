@@ -111,7 +111,7 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <Container>
+      <Container className="registration-container">
         <Nav.Item style={{ backgroundColor: "black" }}>
           <Nav.Link href="/">
             <div className="logo-registration">
