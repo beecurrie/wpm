@@ -62,7 +62,7 @@ export default function LoginForm() {
   }
 
   return (
-    <Container>
+    <Container className="login-container">
       <Nav.Item style={{backgroundColor: "black"}}>
           <Nav.Link href="/">
             <div className="logo-registration">
@@ -90,8 +90,8 @@ export default function LoginForm() {
           ) : (
             <div className="text-danger">{msg}</div>
           )}
-          <Form onSubmit={submitHandler}>
-            <Row className="mt-3">
+          <Form className="login-form" onSubmit={submitHandler}>
+            <Row className="mb-3">
               <Col lg={true}>
                 <Form.Group className="mb-3" controlId="formEmail">
                   <Form.Label>Email</Form.Label>
@@ -136,7 +136,7 @@ export default function LoginForm() {
               </Col>
               <div>
               <Row className="mt-5">
-                <Col lg={6}>
+                <Col lg={6} className="mb-3">
                   <p className="sign-in-text">Don't have an account yet?</p>
                   <Nav.Item className="nav-item">
                     <Nav.Link href="/register">Register</Nav.Link>

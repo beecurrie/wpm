@@ -19,7 +19,9 @@ const App = () => {
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/forgot" element={<ForgotPassword />} />
 
-      <Route element={<ProtectedRoutes />}>
+      <Route 
+      //element={<ProtectedRoutes />}
+      >
         <Route path="/" element={<Start />} />
         <Route path="/dashboard" element={<Start />} />
         <Route path="/logout" element={<LogOut />} />
