@@ -91,7 +91,7 @@ const createPWTrans = async (req, res) => {
 
   // encryption key
   const key = req.user.password;
-  // console.log("key: ", key);
+  console.log("key: ", key);
 
   // encryption algorithm
   const algorithm = "aes-256-cbc";
