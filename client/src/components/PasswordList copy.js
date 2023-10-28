@@ -10,7 +10,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
-import Stack from "react-bootstrap/Stack";
 
 import PasswordForm from "./PasswordForm";
 
@@ -18,13 +17,7 @@ import { usePasswordsContext } from "../hooks/usePasswordsContext";
 import Button from "react-bootstrap/esm/Button";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEdit,
-  faEraser,
-  faCirclePlus,
-  faEye,
-  faEyeSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEraser } from "@fortawesome/free-solid-svg-icons";
 import { auto } from "async";
 
 function PasswordList() {
@@ -152,39 +145,29 @@ function PasswordList() {
             })}
         </Breakpoint>
         <Breakpoint large up>
-          <Row>
-            {passwords &&
-              passwords.map((pw, idx) => {
-                return (
-                  <Col>
-                    <Card
-                      style={{ marginBottom: 5 }}
-                      key={idx}
-                      bg={"dark"}
-                      text={"white"}
-                    >
-                      <Card.Header style={{ textAlign: "right" }}>
-                        <h3>{idx + 1}</h3>
-                      </Card.Header>
-                      <Card.Body>
-                        <Card.Text>Username: {pw.username}</Card.Text>
-                        <Card.Text>
-                          Password:{" "}
-                          {showPassword ? pw.password : "************"}
-                        </Card.Text>
-                        <Card.Text>URL: {pw.url}</Card.Text>
-                        <Card.Text>Remarks: {pw.remarks}</Card.Text>
+          {passwords && (
+            <Table striped>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Username </th>
+                  <th>Password</th>
+                  <th>URL</th>
+                  <th>Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
 
-                        <FontAwesomeIcon
-                          icon={faEraser}
-                          className="text-danger"
-                          style={{
-                            fontSize: "16px",
-                            cursor: "pointer",
-                            float: "right",
-                          }}
-                          onClick={() => handleClickDelete(pw._id)}
-                        />
+              <tbody>
+                {passwords.map((pw, idx) => {
+                  return (
+                    <tr key={idx}>
+                      <td>{idx + 1}</td>
+                      <td>{pw.username}</td>
+                      <td>{showPassword ? pw.password : "************"}</td>
+                      <td>{pw.url}</td>
+                      <td>{pw.remarks}</td>
+                      <td>
                         <FontAwesomeIcon
                           icon={faEdit}
                           className="text-primary"
@@ -192,16 +175,22 @@ function PasswordList() {
                             fontSize: "16px",
                             marginRight: "5px",
                             cursor: "pointer",
-                            float: "right",
                           }}
                           onClick={() => handleClickEdit(pw.id)}
                         />
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })}
-          </Row>
+                        <FontAwesomeIcon
+                          icon={faEraser}
+                          className="text-danger"
+                          style={{ fontSize: "16px", cursor: "pointer" }}
+                          onClick={() => handleClickDelete(pw._id)}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )}
         </Breakpoint>
       </div>
     );
@@ -214,30 +203,22 @@ function PasswordList() {
         </Col>
         <Col>
           <Breakpoint small down>
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              className="text-warning"
-              style={{
-                fontSize: "30px",
-                margin: "5px",
-                cursor: "pointer",
-                float: "right",
-              }}
+            <Button
               onClick={handleClick}
-            />
+              style={{ margin: 10, float: "right" }}
+              variant="warning"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </Button>
           </Breakpoint>
           <Breakpoint medium up>
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              className="text-warning"
-              style={{
-                fontSize: "30px",
-                margin: "5px",
-                cursor: "pointer",
-                float: "right",
-              }}
+            <Button
               onClick={handleClick}
-            />
+              style={{ margin: 10, float: "right" }}
+              variant="warning"
+            >
+              {showPassword ? "Hide" : "Show"} Passwords
+            </Button>
           </Breakpoint>
         </Col>
       </Row>

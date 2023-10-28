@@ -9,6 +9,13 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEdit,
+  faEraser,
+  faCirclePlus,
+} from "@fortawesome/free-solid-svg-icons";
+
 import { usePasswordsContext } from "../hooks/usePasswordsContext";
 
 function PasswordForm() {
@@ -77,14 +84,30 @@ function PasswordForm() {
   return (
     <>
       <Breakpoint small down>
-        <Button variant="primary" onClick={handleShow} style={{ margin: 10 }}>
-          New
-        </Button>
+        <FontAwesomeIcon
+          icon={faCirclePlus}
+          className="text-warning"
+          style={{
+            fontSize: "30px",
+            margin: "5px",
+            cursor: "pointer",
+            float: "left",
+          }}
+          onClick={handleShow}
+        />
       </Breakpoint>
       <Breakpoint medium up>
-        <Button variant="primary" onClick={handleShow} style={{ margin: 10 }}>
-          New Password
-        </Button>
+        <FontAwesomeIcon
+          icon={faCirclePlus}
+          className="text-warning"
+          style={{
+            fontSize: "30px",
+            margin: "5px",
+            cursor: "pointer",
+            float: "left",
+          }}
+          onClick={handleShow}
+        />
       </Breakpoint>
 
       <Modal show={show} onHide={handleClose}>
