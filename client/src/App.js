@@ -28,9 +28,8 @@ const App = () => {
           element={<UpdateProfile shownav={true} userdata={user} />}
         />
         <Route path="/changepassword" element={<ChangePassword />} />
-
-        <Route path="/undercons" element={<UnderConstruction />} />
       </Route>
+      <Route path="/undercons" element={<UnderConstruction />} />
     </Routes>
   );
 };

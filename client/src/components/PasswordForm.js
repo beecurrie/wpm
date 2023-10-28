@@ -8,7 +8,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 
 import { usePasswordsContext } from "../hooks/usePasswordsContext";
 
@@ -27,30 +26,11 @@ function PasswordForm() {
   const formRemarksRef = useRef();
 
   const [error, setError] = useState(null);
-  const [file, setFile] = useState("");
-  const [message, setMessage] = useState("");
 
   const [focused, setFocused] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleFocus = async (e) => {
-    setFocused(true);
-    setErrorMessage("Invalid email");
-    try {
-      //   const response = await axios.get("/api/wpm/user/" + e.target.value);
-      //   if (response.data.duplicate) {
-      //     e.target.setCustomValidity("Invalid field."); //forcefully set the :invalid pseudo CSS
-      //     setFocused(true);
-      //     setErrorMessage("Email already registered!");
-      //   } else {
-      //     e.target.setCustomValidity(""); //restores :valid pseudo CSS
-      //   }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const checkPassword = (e) => {
     if (password.val !== e.target.value) {
@@ -62,20 +42,6 @@ function PasswordForm() {
       setFocused(false);
     }
   };
-
-  //   const onChange = (e) => {
-  //     setFile(e.target.files[0]);
-
-  //     setFilePreview(URL.createObjectURL(e.target.files[0]));
-
-  //     // Image preview
-  //     const reader = new FileReader();
-  //     reader.onload = function (e) {
-  //       reader.readAsDataURL(e.target.files[0]);
-
-  //       return true;
-  //     };
-  //   };
 
   const navigate = useNavigate();
 
@@ -100,8 +66,7 @@ function PasswordForm() {
 
       console.log(response.data);
 
-      setMessage("New record saved");
-      navigate("/", { replace: true });
+      // navigate("/", { replace: true });
     } catch (err) {
       console.log(err);
       setError(err.response.data.error);
@@ -136,7 +101,6 @@ function PasswordForm() {
                   placeholder="username"
                   ref={formUsernameRef}
                   required
-                  onBlur={handleFocus}
                   focused={focused.toString()}
                 />
                 <span className="spanerror">{errorMessage}</span>

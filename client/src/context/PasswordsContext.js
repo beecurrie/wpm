@@ -22,9 +22,7 @@ export const passwordsReducer = (state, action) => {
       };
     case "DELETE_PASSWORD":
       return {
-        passwords: state.passwords.filter(
-          (pw) => pw._id !== action.payload._id
-        ),
+        passwords: state.passwords.filter((pw) => pw._id !== action.payload),
       };
     case "SET_USERS":
       return {
@@ -50,7 +48,7 @@ export const passwordsReducer = (state, action) => {
 
 export const PasswordsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(passwordsReducer, {
-    passwords: null,
+    passwords: [],
   });
 
   return (

@@ -44,6 +44,7 @@ const getPasswords = async (req, res) => {
     let decrypted = decipher.update(pw.password, "hex", "utf8");
     decrypted += decipher.final("utf8");
     return {
+      _id: pw._id,
       owner: pw.owner,
       username: pw.username,
       password: decrypted,
@@ -113,7 +114,8 @@ const createPWTrans = async (req, res) => {
       remarks,
     });
     pwtrans.password = plainText; //return the plain text to client similar to the getPasswords() code
-    // console.log("pwtrans: ", pwtrans);
+    // pwtrans.id = _id;
+    console.log("pwtrans: ", pwtrans);
     res.status(200).json(pwtrans);
   } catch (error) {
     res.status(400).json({ error: error.message });

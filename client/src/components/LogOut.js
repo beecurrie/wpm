@@ -1,24 +1,14 @@
-import axios from "axios";
-
 const LogOut = () => {
   const doLogOut = async () => {
     try {
-      await axios.get("/api/wpm/logout");
       localStorage.setItem("auth", "false");
       localStorage.setItem("user", null);
-
       window.location.replace("/");
     } catch (err) {
       console.log(err);
     }
   };
-
-  return (
-    <div>
-      <h1 className="text-white">Logged Out</h1>
-      {doLogOut()}
-    </div>
-  );
+  doLogOut();
 };
 
 export default LogOut;
