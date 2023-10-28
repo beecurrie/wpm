@@ -149,13 +149,17 @@ function PasswordList() {
                         <FontAwesomeIcon
                           icon={faEdit}
                           className="text-primary"
-                          style={{ fontSize: "16px", marginRight: "5px" }}
+                          style={{
+                            fontSize: "16px",
+                            marginRight: "5px",
+                            cursor: "pointer",
+                          }}
                           onClick={() => handleClickEdit(pw.id)}
                         />
                         <FontAwesomeIcon
                           icon={faEraser}
                           className="text-danger"
-                          style={{ fontSize: "16px" }}
+                          style={{ fontSize: "16px", cursor: "pointer" }}
                           onClick={() => handleClickDelete(pw._id)}
                         />
                       </td>
