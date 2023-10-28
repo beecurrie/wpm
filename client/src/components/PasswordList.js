@@ -117,6 +117,28 @@ function PasswordList() {
                       URL: {pw.url}
                     </Card.Subtitle>
                     <Card.Text>Remarks: {pw.remarks}</Card.Text>
+
+                    <FontAwesomeIcon
+                      icon={faEraser}
+                      className="text-danger"
+                      style={{
+                        fontSize: "16px",
+                        cursor: "pointer",
+                        float: "right",
+                      }}
+                      onClick={() => handleClickDelete(pw._id)}
+                    />
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      className="text-primary"
+                      style={{
+                        fontSize: "16px",
+                        marginRight: "5px",
+                        cursor: "pointer",
+                        float: "right",
+                      }}
+                      onClick={() => handleClickEdit(pw.id)}
+                    />
                   </Card.Body>
                 </Card>
               );
