@@ -108,101 +108,55 @@ function PasswordList() {
   const ShowPasswords = () => {
     return (
       <div>
-        <Breakpoint small down>
+        <Row>
           {passwords &&
             passwords.map((pw, idx) => {
               return (
-                <Card style={{ marginBottom: 5 }} key={idx}>
-                  <Card.Body>
-                    <Card.Title>
-                      {idx + 1}. Username: {pw.username}
-                    </Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      Password: {showPassword ? pw.password : "************"}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      URL: {pw.url}
-                    </Card.Subtitle>
-                    <Card.Text>Remarks: {pw.remarks}</Card.Text>
+                <Col>
+                  <Card
+                    style={{ marginBottom: 5 }}
+                    key={idx}
+                    bg={"dark"}
+                    text={"white"}
+                  >
+                    <Card.Header style={{ textAlign: "right" }}>
+                      <h3>{idx + 1}</h3>
+                    </Card.Header>
+                    <Card.Body>
+                      <Card.Text>Username: {pw.username}</Card.Text>
+                      <Card.Text>
+                        Password: {showPassword ? pw.password : "************"}
+                      </Card.Text>
+                      <Card.Text>URL: {pw.url}</Card.Text>
+                      <Card.Text>Remarks: {pw.remarks}</Card.Text>
 
-                    <FontAwesomeIcon
-                      icon={faEraser}
-                      className="text-danger"
-                      style={{
-                        fontSize: "16px",
-                        cursor: "pointer",
-                        float: "right",
-                      }}
-                      onClick={() => handleClickDelete(pw._id)}
-                    />
-                    <FontAwesomeIcon
-                      icon={faEdit}
-                      className="text-primary"
-                      style={{
-                        fontSize: "16px",
-                        marginRight: "5px",
-                        cursor: "pointer",
-                        float: "right",
-                      }}
-                      onClick={() => handleClickEdit(pw.id)}
-                    />
-                  </Card.Body>
-                </Card>
+                      <FontAwesomeIcon
+                        icon={faEraser}
+                        className="text-danger"
+                        style={{
+                          fontSize: "16px",
+                          cursor: "pointer",
+                          float: "right",
+                        }}
+                        onClick={() => handleClickDelete(pw._id)}
+                      />
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        className="text-primary"
+                        style={{
+                          fontSize: "16px",
+                          marginRight: "5px",
+                          cursor: "pointer",
+                          float: "right",
+                        }}
+                        onClick={() => handleClickEdit(pw.id)}
+                      />
+                    </Card.Body>
+                  </Card>
+                </Col>
               );
             })}
-        </Breakpoint>
-        <Breakpoint large up>
-          <Row>
-            {passwords &&
-              passwords.map((pw, idx) => {
-                return (
-                  <Col>
-                    <Card
-                      style={{ marginBottom: 5 }}
-                      key={idx}
-                      bg={"dark"}
-                      text={"white"}
-                    >
-                      <Card.Header style={{ textAlign: "right" }}>
-                        <h3>{idx + 1}</h3>
-                      </Card.Header>
-                      <Card.Body>
-                        <Card.Text>Username: {pw.username}</Card.Text>
-                        <Card.Text>
-                          Password:{" "}
-                          {showPassword ? pw.password : "************"}
-                        </Card.Text>
-                        <Card.Text>URL: {pw.url}</Card.Text>
-                        <Card.Text>Remarks: {pw.remarks}</Card.Text>
-
-                        <FontAwesomeIcon
-                          icon={faEraser}
-                          className="text-danger"
-                          style={{
-                            fontSize: "16px",
-                            cursor: "pointer",
-                            float: "right",
-                          }}
-                          onClick={() => handleClickDelete(pw._id)}
-                        />
-                        <FontAwesomeIcon
-                          icon={faEdit}
-                          className="text-primary"
-                          style={{
-                            fontSize: "16px",
-                            marginRight: "5px",
-                            cursor: "pointer",
-                            float: "right",
-                          }}
-                          onClick={() => handleClickEdit(pw.id)}
-                        />
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })}
-          </Row>
-        </Breakpoint>
+        </Row>
       </div>
     );
   };
