@@ -12,8 +12,7 @@ import CardBody from "react-bootstrap/esm/CardBody";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 
-
-//Login Screen 
+//Login Screen
 export default function LoginForm() {
   const formEmailRef = useRef();
   const formPasswordRef = useRef();
@@ -63,18 +62,18 @@ export default function LoginForm() {
 
   return (
     <Container className="login-container">
-          <Nav.Link href="/">
-            <div className="logo-registration">
-              <img
-                src="../WPM_Security-logos_white.png"
-                alt="Upper left logo"
-                align="left"
-                width="200"
-                height="120"
-              />
-            </div>
-          </Nav.Link>
-      
+      <Nav.Link href="/">
+        <div className="logo-registration">
+          <img
+            src="../WPM_Security-logos_white.png"
+            alt="Upper left logo"
+            align="left"
+            width="200"
+            height="120"
+          />
+        </div>
+      </Nav.Link>
+
       <Card className="sign-in-box-card">
         <CardBody className="sign-in-box-card-body">
           {user && user.auth ? (
@@ -82,23 +81,26 @@ export default function LoginForm() {
           ) : (
             <div className="text-danger">{msg}</div>
           )}
-          
+
           <div className="profile-icon">
-            <img src="../user.png" alt="profile icon" style={{width: "20%", opacity: "0.5"}}/>
+            <img
+              src="../user.png"
+              alt="profile icon"
+              style={{ width: "10%", opacity: "0.5", marginTop: "-3%" }}
+            />
           </div>
           <Card.Title className="card-title">Sign In</Card.Title>
           <Form className="login-form" onSubmit={submitHandler}>
-
             <Row className="mb-3">
               <Form.Group className="mb-3" controlId="formEmail">
                 <Col lg={true}>
                   <Form.Control
                     id="username"
                     type="email"
-                    placeholder="Username" 
+                    placeholder="Username"
                     ref={formEmailRef}
                     require
-                    />
+                  />
                 </Col>
               </Form.Group>
             </Row>
@@ -115,49 +117,59 @@ export default function LoginForm() {
               </Col>
             </Row>
             <Row>
-             <Col lg={true}>
-              <div id="login-btn" className="d-grid gap-2">
-                <Button
-                  style={{
-                    padding: "8px",
-                    borderRadius: "12px",
-                    backgroundColor: "#03989e",
-                    color: "white",
-                  }}
-                  variant="light"
-                  type="submit"
-                >
-                  Login
+              <Col lg={true}>
+                <div id="login-btn" className="d-grid gap-2">
+                  <Button
+                    style={{
+                      padding: "8px",
+                      borderRadius: "12px",
+                      backgroundColor: "#03989e",
+                      color: "white",
+                    }}
+                    variant="light"
+                    type="submit"
+                  >
+                    Login
                   </Button>
                 </div>
               </Col>
             </Row>
             <Row className="mt-5">
               <Col>
-              {/* Edit here */}
-                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" />
+                {/* Edit here */}
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="check1"
+                  name="option1"
+                  value="something"
+                />
                 <label class="form-check-label">Remember me</label>
               </Col>
               <Col>
-              <Nav.Link href="/forgot" className="nav-item">
+                <Nav.Link href="/forgot" className="nav-item">
                   Forgot Password?
                 </Nav.Link>
               </Col>
-             </Row>
+            </Row>
           </Form>
         </CardBody>
       </Card>
-      <hr style={{
-        border: "white solid 2px", 
-        opacity: "1",
-        borderRadius: "10px",
-        marginTop: "50px",
-        }}/>
+      <hr
+        style={{
+          border: "white solid 2px",
+          opacity: "1",
+          borderRadius: "10px",
+          marginTop: "50px",
+        }}
+      />
       <div>
         <Row className="mt-2">
           <Col lg={true} className="mb-3">
-            <Nav.Item>  
-              <Nav.Link className="reg-text" href="/register">Don't have an account yet? REGISTER HERE</Nav.Link>
+            <Nav.Item>
+              <Nav.Link className="reg-text" href="/register">
+                Don't have an account yet? REGISTER HERE
+              </Nav.Link>
             </Nav.Item>
           </Col>
         </Row>
