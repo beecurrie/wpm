@@ -203,6 +203,13 @@ h1 {
   .login-container {
     width: 30%;
   }
+  .imagePreview {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: 20px;
+  }
 }
 
 .sign-in-box-card-body {
