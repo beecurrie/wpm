@@ -82,13 +82,8 @@ export default function LoginForm() {
             <div className="text-danger">{msg}</div>
           )}
 
-          <div className="profile-icon">
-            <img
-              src="../user.png"
-              alt="profile icon"
-              style={{ width: "10%", opacity: "0.5", marginTop: "-3%" }}
-            />
-          </div>
+          <img className="profile-icon" src="../user.png" alt="profile icon" />
+
           <Card.Title className="card-title">Sign In</Card.Title>
           <Form className="login-form" onSubmit={submitHandler}>
             <Row className="mb-3">

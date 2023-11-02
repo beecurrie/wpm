@@ -130,13 +130,13 @@ export default function RegisterForm() {
         <Card className="reg-box-card">
           <Card.Body>
             {message ? <Message msg={message} /> : null}
-            <div className="profile-icon">
-              <img
-                src="../user.png"
-                alt="profile icon"
-                style={{ width: "10%", opacity: "0.5", marginTop: "-3%" }}
-              />
-            </div>
+
+            <img
+              className="profile-icon"
+              src="../user.png"
+              alt="profile icon"
+            />
+
             <Card.Title className="text-center text-white">
               <h3 style={{ marginTop: "-3%" }}>User Registration</h3>
             </Card.Title>
