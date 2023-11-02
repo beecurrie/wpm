@@ -10,6 +10,7 @@ body {
     font-size: medium;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(../public/background-img.jpg);
 }
 
 code {
@@ -87,32 +88,19 @@ button {
 
 /* Login and Registration */
 .login-form {
-  padding-bottom: 10%;
-}
-
-.logo-signIn {
-  width: 60%;
-  max-width: 100%;
-  height: auto;
-  padding-top: 5%;
-  padding-left: 10%;
-  float: left;
+  padding: 5% 10% 10% 10%;
 }
 
 .logo-registration {
-  width: 10px;
-  padding-top: 2%;
+  width: 100%;
+  padding-bottom: 5%;
   float: left;
-}
 
-div.h1-login {
-  padding-top: 15%;
-  font-weight: 300;
+}
+.profile-icon {
   text-align: center;
-  color: white;
-  margin: 0.5em 0.2em;
+  margin-top: -10%;
 }
-
 .login-field {
   padding-top: 10%;
   padding-right: 10%;
@@ -144,7 +132,7 @@ div.h1-login {
 
 .reg-text {
   color: white;
-  text-align: end;
+  text-align: center;
 }
 
 .label-text {
@@ -158,44 +146,54 @@ div.h1-login {
   height: auto;
 }
 
-/* Breaking pointto become mobile friendly */
-@media screen and (min-width: 800px) {
-  .login-container {
-    max-width:40%;
-  }
+.form-check-label {
+  padding-left: 10px;
+  color: white;
 }
 
-@media screen and (min-width: 800px) {
+.nav-item {
+  color: white;
+}
+
+/* Breaking pointto become mobile friendly */
+@media screen and (min-width: 700px) {
+  .login-container {
+    max-width:50%;
+  }
   .registration-container {
-    max-width:60%;
+    max-width:80%;
   }
 }
 
 .sign-in-box-card-body {
   padding: 5px;
   height: auto;
-  background-color: #759EB8;
   border-radius: 10px;
 }
 
-.sign-in-box-card {
-  background-color: #759EB8;
+.sign-in-box-card, .reg-box-card {
   width: 100%;
   margin: auto;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  background:#1a11117a;
 }
 
-p.sign-in-text {
-  font-size: 14px;
-  font-style: italic;
-  margin-bottom: -.2%;
-  padding-left: 8px;
+.card-title {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 5%;
 }
+
 
 .nav-item {
-  background-color: #C5D5EA;
-  padding: 8px;
-  border-radius: 15px;
-  text-align: center;
+  color: white;
+  text-align: right;
+  padding-right: 0;
+}
+
+.form-check-label, .nav-item {
+  font-size: 14px;
 }
 
 .userbox {

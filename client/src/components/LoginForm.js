@@ -9,9 +9,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/esm/Container";
 import CardBody from "react-bootstrap/esm/CardBody";
-import CardHeader from "react-bootstrap/esm/CardHeader";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
+
 
 //Login Screen 
 export default function LoginForm() {
@@ -63,51 +63,48 @@ export default function LoginForm() {
 
   return (
     <Container className="login-container">
-      <Nav.Item style={{backgroundColor: "black"}}>
           <Nav.Link href="/">
             <div className="logo-registration">
               <img
-                src="../WPM_Logo.png"
+                src="../WPM_Security-logos_white.png"
                 alt="Upper left logo"
                 align="left"
                 width="200"
-                height="50"
+                height="120"
               />
             </div>
           </Nav.Link>
-        </Nav.Item>
-      <div className="h1-login">
-        <h1>Web-based Password Manager</h1>
-      </div>
       
       <Card className="sign-in-box-card">
-        <CardHeader className="card-header text-center text-black">
-        <h3>SIGN-IN</h3>
-        </CardHeader>
         <CardBody className="sign-in-box-card-body">
           {user && user.auth ? (
             <div className="text-black">{msg}</div>
           ) : (
             <div className="text-danger">{msg}</div>
           )}
+          
+          <div className="profile-icon">
+            <img src="../user.png" alt="profile icon" style={{width: "20%", opacity: "0.5"}}/>
+          </div>
+          <Card.Title className="card-title">Sign In</Card.Title>
           <Form className="login-form" onSubmit={submitHandler}>
+
             <Row className="mb-3">
-              <Col lg={true}>
-                <Form.Group className="mb-3" controlId="formEmail">
-                  <Form.Label>Email</Form.Label>
+              <Form.Group className="mb-3" controlId="formEmail">
+                <Col lg={true}>
                   <Form.Control
+                    id="username"
                     type="email"
-                    placeholder="email"
+                    placeholder="Username" 
                     ref={formEmailRef}
-                    required
-                  />
-                </Form.Group>
-              </Col>
+                    require
+                    />
+                </Col>
+              </Form.Group>
             </Row>
             <Row>
               <Col lg={true}>
                 <Form.Group className="mb-3" controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Password"
@@ -118,44 +115,53 @@ export default function LoginForm() {
               </Col>
             </Row>
             <Row>
-              <Col lg={8}></Col>
-              <Col lg={4}>
-                <div className="d-grid gap-2">
-                  <Button
-                    style={{
-                      padding: "8px",
-                      borderRadius: "15px",
-                      backgroundColor: "#C5D5EA",
-                    }}
-                    variant="light"
-                    type="submit"
-                  >
-                    Sign-in
+             <Col lg={true}>
+              <div id="login-btn" className="d-grid gap-2">
+                <Button
+                  style={{
+                    padding: "8px",
+                    borderRadius: "12px",
+                    backgroundColor: "#03989e",
+                    color: "white",
+                  }}
+                  variant="light"
+                  type="submit"
+                >
+                  Login
                   </Button>
                 </div>
               </Col>
-              <div>
-              <Row className="mt-5">
-                <Col lg={6} className="mb-3">
-                  <p className="sign-in-text">Don't have an account yet?</p>
-                  <Nav.Item className="nav-item">
-                    <Nav.Link href="/register">Register</Nav.Link>
-                  </Nav.Item>
-                </Col>
-                <Col lg={6}>
-                  <p className="sign-in-text">Re-set your password here.</p>
-                  <Nav.Item className="nav-item">
-                    <Nav.Link href="/forgot">
-                      Forgot Password?
-                    </Nav.Link>
-                  </Nav.Item>
-                </Col>
-              </Row>
-              </div>
             </Row>
+            <Row className="mt-5">
+              <Col>
+              {/* Edit here */}
+                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" />
+                <label class="form-check-label">Remember me</label>
+              </Col>
+              <Col>
+              <Nav.Link href="/forgot" className="nav-item">
+                  Forgot Password?
+                </Nav.Link>
+              </Col>
+             </Row>
           </Form>
         </CardBody>
       </Card>
+      <hr style={{
+        border: "white solid 2px", 
+        opacity: "1",
+        borderRadius: "10px",
+        marginTop: "50px",
+        }}/>
+      <div>
+        <Row className="mt-2">
+          <Col lg={true} className="mb-3">
+            <Nav.Item>  
+              <Nav.Link className="reg-text" href="/register">Don't have an account yet? REGISTER HERE</Nav.Link>
+            </Nav.Item>
+          </Col>
+        </Row>
+      </div>
     </Container>
   );
 }
