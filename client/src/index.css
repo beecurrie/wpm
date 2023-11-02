@@ -165,7 +165,7 @@ h1 {
 
 /* Breaking pointto become mobile friendly */
 
-@media screen and (min-width: 500px) {
+@media only screen and (max-width: 700px) {
   .imagePreview {
     margin-top: 5px;
   }
@@ -198,10 +198,10 @@ h1 {
     margin-right: auto;
   }
   .registration-container {
-    width: 30%;
+    width: 50%;
   }
   .login-container {
-    width: 30%;
+    width: 50%;
   }
   .imagePreview {
     border: 1px solid #ddd;
