@@ -112,34 +112,32 @@ export default function RegisterForm() {
   return (
     <div>
       <Container className="registration-container">
-        <Nav.Item style={{ backgroundColor: "black" }}>
+        <Nav.Item>
           <Nav.Link href="/">
             <div className="logo-registration">
               <img
-                src="../WPM_Logo.png"
+                src="../WPM_Security-logos_white.png"
                 alt="Upper left logo"
                 align="left"
                 width="200"
-                height="50"
+                height="120"
               />
             </div>
           </Nav.Link>
         </Nav.Item>
-
-        <div className="h1-login">
-          <h1>Web-based Password Manager</h1>
-        </div>
-
-        <Card style={{ backgroundColor: "#759EB8" }}>
-          <Card.Header className="card-header text-center text-black">
-            <h3>User Registration</h3>
-          </Card.Header>
+        <Card className="reg-box-card">
           <Card.Body>
             {message ? <Message msg={message} /> : null}
+            <div className="profile-icon">
+              <img src="../user.png" alt="profile icon" style={{width: "20%", opacity: "0.5", marginTop: "-3%"}}/>
+            </div>
+            <Card.Title className="text-center text-white">
+            <h3>User Registration</h3>
+          </Card.Title>
             <Form onSubmit={submitHandler}>
               <Row>
                 <Col lg={5}>
-                  <Form.Group className="mb-3" controlId="formEmail">
+                  <Form.Group className="mb-3 text-white" controlId="formEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
@@ -154,7 +152,7 @@ export default function RegisterForm() {
                 </Col>
                 <Col lg={2}></Col>
                 <Col lg={5}>
-                  <Form.Group controlId="formFile" className="mb-3">
+                  <Form.Group controlId="formFile" className="mb-3 text-white">
                     <Form.Label>Upload Photo</Form.Label>
                     <Form.Control type="file" onChange={onChange} required />
                   </Form.Group>
@@ -162,7 +160,7 @@ export default function RegisterForm() {
               </Row>
               <Row>
                 <Col lg={5}>
-                  <Form.Group className="mb-3" controlId="formPassword">
+                  <Form.Group className="mb-3 text-white" controlId="formPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                       type="password"
@@ -193,7 +191,7 @@ export default function RegisterForm() {
               </Row>
               <Row>
                 <Col lg={5}>
-                  <Form.Group className="mb-3" controlId="formRePassword">
+                  <Form.Group className="mb-3 text-white" controlId="formRePassword">
                     <Form.Label>Re-type Password</Form.Label>
                     <Form.Control
                       type="password"
@@ -210,7 +208,7 @@ export default function RegisterForm() {
               </Row>
               <Row>
                 <Col lg={5}>
-                  <Form.Group className="mb-3" controlId="formFirstname">
+                  <Form.Group className="mb-3 text-white" controlId="formFirstname">
                     <Form.Label>Firstname</Form.Label>
                     <Form.Control
                       type="text"
@@ -223,7 +221,7 @@ export default function RegisterForm() {
               </Row>
               <Row>
                 <Col lg={5}>
-                  <Form.Group className="mb-3" controlId="formLastname">
+                  <Form.Group className="mb-3 text-white" controlId="formLastname">
                     <Form.Label>Lastname</Form.Label>
                     <Form.Control
                       type="text"
@@ -239,9 +237,10 @@ export default function RegisterForm() {
                   {error}
                   <div className="mt-3 d-grid">
                     <Button
+                      className="text-white"
                       variant="light"
                       type="submit"
-                      style={{ backgroundColor: "#B3C5D7" }}
+                      style={{ backgroundColor: "#03989e" }}
                     >
                       Submit
                     </Button>
@@ -251,6 +250,21 @@ export default function RegisterForm() {
             </Form>
           </Card.Body>
         </Card>
+        <hr style={{
+          border: "white solid 2px", 
+          opacity: "1",
+          borderRadius: "10px",
+          marginTop: "50px",
+        }}/>
+        <div>
+          <Row className="mt-2">
+            <Col lg={true} className="mb-3">
+              <Nav.Item>  
+                <Nav.Link className="reg-text" href="/register">Already have an account? SIGN IN HERE</Nav.Link>
+              </Nav.Item>
+            </Col>
+          </Row>
+        </div>
       </Container>
     </div>
   );
