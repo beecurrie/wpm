@@ -129,18 +129,7 @@ export default function LoginForm() {
                 </div>
               </Col>
             </Row>
-            <Row className="mt-5">
-              <Col>
-                {/* Edit here */}
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="check1"
-                  name="option1"
-                  value="something"
-                />
-                <label class="form-check-label">Remember me</label>
-              </Col>
+            <Row className="mt-2">
               <Col>
                 <Nav.Link href="/forgot" className="nav-item">
                   Forgot Password?
