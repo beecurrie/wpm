@@ -231,14 +231,6 @@ export default function RegisterForm() {
             </Form>
           </Card.Body>
         </Card>
-        <hr
-          style={{
-            border: "white solid 2px",
-            opacity: "1",
-            borderRadius: "10px",
-            marginTop: "50px",
-          }}
-        />
         <div>
           <Row className="mt-2">
             <Col lg={true} className="mb-3">

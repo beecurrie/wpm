@@ -120,6 +120,7 @@ export default function LoginForm() {
                       borderRadius: "12px",
                       backgroundColor: "#03989e",
                       color: "white",
+                      marginTop: "15px",
                     }}
                     variant="light"
                     type="submit"
@@ -131,7 +132,15 @@ export default function LoginForm() {
             </Row>
             <Row className="mt-2">
               <Col>
-                <Nav.Link href="/forgot" className="nav-item">
+                <Nav.Link style={{ color: "white" }} href="/register">
+                  Don't have an account yet? REGISTER HERE
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link
+                  style={{ float: "right", color: "white" }}
+                  href="/forgot"
+                >
                   Forgot Password?
                 </Nav.Link>
               </Col>
@@ -139,25 +148,8 @@ export default function LoginForm() {
           </Form>
         </CardBody>
       </Card>
-      <hr
-        style={{
-          border: "white solid 2px",
-          opacity: "1",
-          borderRadius: "10px",
-          marginTop: "50px",
-        }}
-      />
-      <div>
-        <Row className="mt-2">
-          <Col lg={true} className="mb-3">
-            <Nav.Item>
-              <Nav.Link className="reg-text" href="/register">
-                Don't have an account yet? REGISTER HERE
-              </Nav.Link>
-            </Nav.Item>
-          </Col>
-        </Row>
-      </div>
+
+      <Row className="mt-2"></Row>
     </Container>
   );
 }
