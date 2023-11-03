@@ -158,6 +158,37 @@ div.h1-login {
   height: auto;
 }
 
+/* Forgot Password */
+
+.forgot-pass-box-card {
+  background-color: #759EB8;
+  width: 100%;
+  margin: auto;
+  margin-top: 75px;
+  padding: 5px;
+}
+
+.forgot-pass-box-body {
+  padding: 5px;
+  height: auto;
+  background-color: #759EB8;
+  border-radius: 10px;
+}
+
+.logo-forgot {
+  width: 10px;
+  padding-top: 2%;
+  float: left;
+}
+
+/* Update User Profile */
+
+.update-profile-box {
+  background-color: #759EB8;
+  width: 100%;
+  margin: auto;
+}
+
 /* Breaking pointto become mobile friendly */
 @media screen and (min-width: 800px) {
   .login-container {

@@ -113,8 +113,8 @@ export default function UpdateProfile({
     <>
       <NavBar />
       <Container style={{ marginTop: 100 }}>
-        <Card>
-          <Card.Header className="bg-primary text-center text-white">
+        <Card className="update-profile-box">
+          <Card.Header className="card-header text-center text-white">
             <h3>Update User Profile</h3>
           </Card.Header>
           <Card.Body>
@@ -155,7 +155,7 @@ export default function UpdateProfile({
                 </Col>
                 <Col>
                   {uploadedFile ? (
-                    <div className="mt-4">
+                    <div className="mt-4 mb-4 image-preview-box">
                       <img
                         src={filepreview}
                         style={{
@@ -174,7 +174,15 @@ export default function UpdateProfile({
               <Progress percentage={uploadPercentage} />
               {error}
               <div className="mt-3 d-grid">
-                <Button variant="primary" type="submit">
+              <Button
+                        style={{
+                          padding: "8px",
+                          borderRadius: "15px",
+                          backgroundColor: "#C5D5EA",
+                        }}
+                        variant="light"
+                        type="submit"
+                      >
                   Submit
                 </Button>
               </div>
