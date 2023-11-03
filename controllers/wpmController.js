@@ -263,6 +263,7 @@ const updateUser = async (req, res) => {
       {
         lastname,
         firstname,
+        attachment: req.fname, //added: 04-Nov-2023. Before this fix, the image's filename was not being saved thus resulting from displaying the previous image not the updated one
       },
       { new: true }
     );
@@ -271,6 +272,7 @@ const updateUser = async (req, res) => {
       email: user.email,
       lastname: user.lastname,
       firstname: user.firstname,
+      attachment: req.fname, //attachment field
       auth: true,
     };
     console.log("updated user:", updateduser);

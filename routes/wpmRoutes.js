@@ -42,7 +42,7 @@ const savePhotoDb = async (req, res, next) => {
     chunkSizeBytes: 1024,
     bucketName: "wpmdocs",
   });
-
+  console.log("Filename being uploaded: ", req.file.originalname);
   // shrink image before uploading to MongoDb --> 23-May-23
   const fname = `public/images/wpm-${Date.now()}-${req.file.originalname}`; //file to contain the sharpened image
 

@@ -75,8 +75,8 @@ function PasswordList() {
     handleDelClose();
   };
 
-  const handleClickEdit = (obs_id, user, idx) => {
-    console.log("Clicked Edit button");
+  const handleClickEdit = (id) => {
+    console.log("Clicked Edit button on ID: ", id);
   };
 
   const handleClickDelete = (id) => {
@@ -112,13 +112,8 @@ function PasswordList() {
           {passwords &&
             passwords.map((pw, idx) => {
               return (
-                <Col>
-                  <Card
-                    style={{ marginBottom: 5 }}
-                    key={idx}
-                    bg={"dark"}
-                    text={"white"}
-                  >
+                <Col key={idx}>
+                  <Card style={{ marginBottom: 5 }} bg={"dark"} text={"white"}>
                     <Card.Header style={{ textAlign: "right" }}>
                       <h3>{idx + 1}</h3>
                     </Card.Header>
@@ -149,7 +144,7 @@ function PasswordList() {
                           cursor: "pointer",
                           float: "right",
                         }}
-                        onClick={() => handleClickEdit(pw.id)}
+                        onClick={() => handleClickEdit(pw._id)}
                       />
                     </Card.Body>
                   </Card>

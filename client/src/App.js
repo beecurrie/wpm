@@ -8,7 +8,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import UpdateProfile from "./components/UpdateProfile";
 import ChangePassword from "./components/ChangePassword";
 import ForgotPassword from "./components/ForgotPassword";
-import ShowUsers from "./components/ShowUsers";
+
 import UnderConstruction from "./components/underConstruction";
 
 const App = () => {

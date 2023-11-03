@@ -41,16 +41,7 @@ export default function UpdateProfile({
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
-
-    setFilePreview(URL.createObjectURL(e.target.files[0]));
-
-    // Image preview
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      reader.readAsDataURL(e.target.files[0]);
-
-      return true;
-    };
+    setFilePreview(URL.createObjectURL(e.target.files[0])); //this stuffs the filePreview state variable which is then used as the img src in the preview section
   };
 
   const navigate = useNavigate();
@@ -61,14 +52,14 @@ export default function UpdateProfile({
     const enteredLastname = formLastnameRef.current.value;
     const enteredFirstname = formFirstnameRef.current.value;
 
+    console.log("File: ", file);
+
     //Create Formdata - did this due to the addition of file in the submission of data
     const formData = new FormData();
 
     formData.append("lastname", enteredLastname);
     formData.append("firstname", enteredFirstname);
     formData.append("file", file);
-
-    // localStorage.setItem("user", JSON.stringify(response.data));
 
     try {
       const response = await axios.post(
@@ -97,12 +88,6 @@ export default function UpdateProfile({
         localStorage.setItem("user", JSON.stringify(response.data));
         navigate("/dashboard ", { replace: true });
       }
-
-      const { fileName, filePath } = response.data;
-
-      setUploadedFile({ fileName, filePath });
-
-      setMessage("File Uploaded");
     } catch (err) {
       console.log(err);
       setError(err.response.data.error);
@@ -174,15 +159,15 @@ export default function UpdateProfile({
               <Progress percentage={uploadPercentage} />
               {error}
               <div className="mt-3 d-grid">
-              <Button
-                        style={{
-                          padding: "8px",
-                          borderRadius: "15px",
-                          backgroundColor: "#C5D5EA",
-                        }}
-                        variant="light"
-                        type="submit"
-                      >
+                <Button
+                  style={{
+                    padding: "8px",
+                    borderRadius: "15px",
+                    backgroundColor: "#C5D5EA",
+                  }}
+                  variant="light"
+                  type="submit"
+                >
                   Submit
                 </Button>
               </div>

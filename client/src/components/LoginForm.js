@@ -28,13 +28,7 @@ export default function LoginForm() {
     const enteredEmail = formEmailRef.current.value;
     const enteredPassword = formPasswordRef.current.value;
 
-    //Create Formdata - did this due to the addition of file in the submission of data
-    // const formData = new FormData();
-    // formData.append("email", enteredEmail);
-    // formData.append("password", enteredPassword);
-
     try {
-      // console.log("Entered email and password", enteredEmail, enteredPassword);
       const response = await axios.post("/api/wpm/login", {
         email: enteredEmail,
         password: enteredPassword,
@@ -47,7 +41,6 @@ export default function LoginForm() {
         setUser(response.data);
         setMsg("Login successfull!");
         navigate("/dashboard", { replace: true });
-        // console.log(user);
       } else {
         localStorage.setItem("auth", "false");
         localStorage.setItem("user", null);
@@ -56,7 +49,6 @@ export default function LoginForm() {
       }
     } catch (err) {
       console.log(err);
-      // setError(err.response.data.error);
     }
   }
 
@@ -90,11 +82,9 @@ export default function LoginForm() {
               <Form.Group className="mb-3" controlId="formEmail">
                 <Col lg={true}>
                   <Form.Control
-                    id="username"
                     type="email"
                     placeholder="Username"
                     ref={formEmailRef}
-                    require
                   />
                 </Col>
               </Form.Group>
@@ -106,7 +96,6 @@ export default function LoginForm() {
                     type="password"
                     placeholder="Password"
                     ref={formPasswordRef}
-                    required
                   />
                 </Form.Group>
               </Col>
