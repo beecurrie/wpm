@@ -130,107 +130,147 @@ export default function RegisterForm() {
         <Card className="reg-box-card">
           <Card.Body>
             {message ? <Message msg={message} /> : null}
-
-            <img
-              className="profile-icon"
-              src="../user.png"
-              alt="profile icon"
-            />
-
+            <div className="profile-icon">
+              <img
+                src="../user.png"
+                alt="profile icon"
+                style={{ width: "10%", opacity: "0.5", marginTop: "-3%" }}
+              />
+            </div>
             <Card.Title className="text-center text-white">
               <h3 style={{ marginTop: "-3%" }}>User Registration</h3>
             </Card.Title>
             <Form onSubmit={submitHandler}>
-              <Form.Group className="mb-3 text-white" controlId="formEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="email"
-                  ref={formEmailRef}
-                  required
-                  onBlur={handleFocus}
-                  focused={focused.toString()}
-                />
-                <span className="spanerror">{errorMessage}</span>
-              </Form.Group>
-              <Form.Group className="mb-3 text-white" controlId="formFirstname">
-                <Form.Label>Firstname</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="firstname"
-                  ref={formFirstnameRef}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3 text-white" controlId="formLastname">
-                <Form.Label>Lastname</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="lastname"
-                  ref={formLastnameRef}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3 text-white" controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  ref={formPasswordRef}
-                  required
-                  onChange={(e) => setPassword({ val: e.target.value })}
-                />
-              </Form.Group>
-
-              <Form.Group
-                className="mb-3 text-white"
-                controlId="formRePassword"
-              >
-                <Form.Label>Re-type Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Re-type password"
-                  ref={formRePasswordRef}
-                  pattern={password.val}
-                  onBlur={checkPassword}
-                  focused={focused.toString()}
-                  required
-                />
-                <span className="spanerror">{passwordMessage}</span>
-              </Form.Group>
               <Row>
-                <Col lg={filepreview ? 10 : 12}>
+                <Col lg={6}>
+                  <Form.Group className="mb-3 text-white" controlId="formEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="email"
+                      ref={formEmailRef}
+                      required
+                      onBlur={handleFocus}
+                      focused={focused.toString()}
+                    />
+                    <span className="spanerror">{errorMessage}</span>
+                  </Form.Group>
+                </Col>
+                <Col lg={6}>
+                  <Form.Group
+                    className="mb-3 text-white"
+                    controlId="formFirstname"
+                  >
+                    <Form.Label>Firstname</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="firstname"
+                      ref={formFirstnameRef}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={6}>
+                  <Form.Group
+                    className="mb-3 text-white"
+                    controlId="formPassword"
+                  >
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      ref={formPasswordRef}
+                      required
+                      onChange={(e) => setPassword({ val: e.target.value })}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col lg={6}>
+                  <Form.Group
+                    className="mb-3 text-white"
+                    controlId="formLastname"
+                  >
+                    <Form.Label>Lastname</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="lastname"
+                      ref={formLastnameRef}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={6}>
+                  <Form.Group
+                    className="mb-3 text-white"
+                    controlId="formRePassword"
+                  >
+                    <Form.Label>Re-type Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Re-type password"
+                      ref={formRePasswordRef}
+                      pattern={password.val}
+                      onBlur={checkPassword}
+                      focused={focused.toString()}
+                      required
+                    />
+                    <span className="spanerror">{passwordMessage}</span>
+                  </Form.Group>
+                </Col>
+                <Col lg={!filepreview ? 6 : 5}>
                   <Form.Group controlId="formFile" className="mb-3 text-white">
                     <Form.Label>Upload Photo</Form.Label>
                     <Form.Control type="file" onChange={onChange} required />
                   </Form.Group>
                 </Col>
-
-                {filepreview && (
-                  <Col lg={1}>
-                    <img
-                      className="imagePreview "
-                      src={filepreview}
-                      alt="preview"
-                    />
-                  </Col>
-                )}
+                <Col lg={1}>
+                  {filepreview && (
+                    <div className="mt-4">
+                      <img
+                        src={filepreview}
+                        style={{
+                          border: "1px solid #ddd",
+                          borderRadius: "50%",
+                          width: "60px",
+                          height: "60px",
+                        }}
+                        alt="preview"
+                      />
+                    </div>
+                  )}
+                </Col>
               </Row>
-              {submitting && <Progress percentage={uploadPercentage} />}
-              <div style={{ color: "yellow" }}>{error}</div>
-              <div className="mt-3 d-grid">
-                <Button
-                  className="text-white"
-                  variant="light"
-                  type="submit"
-                  style={{ backgroundColor: "#03989e" }}
-                >
-                  Submit
-                </Button>
-              </div>
+              <Row>
+                {submitting && <Progress percentage={uploadPercentage} />}
+                <div style={{ color: "yellow" }}>{error}</div>
+              </Row>
+              <Row>
+                <div className="mt-3 d-grid">
+                  <Button
+                    className="text-white"
+                    variant="light"
+                    type="submit"
+                    style={{ backgroundColor: "#03989e" }}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </Row>
             </Form>
           </Card.Body>
         </Card>
+        <hr
+          style={{
+            border: "white solid 2px",
+            opacity: "1",
+            borderRadius: "10px",
+            marginTop: "50px",
+          }}
+        />
         <div>
           <Row className="mt-2">
             <Col lg={true} className="mb-3">

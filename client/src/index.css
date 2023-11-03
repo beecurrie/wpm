@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -7,9 +7,14 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    font-size: medium;
+  font-size: medium;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: darkslategrey;
+}
+
+button {
+  height: 40px;
 }
 
 code {
@@ -46,8 +51,9 @@ h1 {
 .imagePreview {
   border: 1px solid #ddd;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
 }
 .image-item {
   display: flex;
@@ -60,8 +66,8 @@ h1 {
   margin-left: 10px;
 }
 
-button {
-  height: 40px;
+.img-preview {
+  margin-top: 40%;
 }
 
 .loader-container {
@@ -86,31 +92,26 @@ button {
 }
 
 /* Login and Registration */
-.login-form {
-  padding-bottom: 10%;
+
+.login-container {
+  width: 10%;
 }
 
-.logo-signIn {
-  width: 60%;
-  max-width: 100%;
-  height: auto;
-  padding-top: 5%;
-  padding-left: 10%;
-  float: left;
+.login-form {
+  padding: 5% 10% 10% 10%;
 }
 
 .logo-registration {
-  width: 10px;
-  padding-top: 2%;
+  width: 100%;
+  padding-bottom: 5%;
   float: left;
 }
 
-div.h1-login {
-  padding-top: 15%;
-  font-weight: 300;
-  text-align: center;
-  color: white;
-  margin: 0.5em 0.2em;
+.profile-icon {
+  opacity: 0.5;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
 }
 
 .login-field {
@@ -119,6 +120,10 @@ div.h1-login {
   width: 40%;
   height: 100%;
   float: right;
+}
+
+.progress {
+  margin-top: 5px;
 }
 
 .reg-field {
@@ -144,18 +149,19 @@ div.h1-login {
 
 .reg-text {
   color: white;
-  text-align: end;
+  text-align: center;
+}
+.registration-container {
+  width: 30%;
 }
 
 .label-text {
   color: white;
 }
 
-.img-preview {
-  float: right;
-  margin-top: -10%;
-  width: 30%;
-  height: auto;
+.form-check-label {
+  padding-left: 10px;
+  color: white;
 }
 
 /* Forgot Password */
@@ -190,43 +196,84 @@ div.h1-login {
 }
 
 /* Breaking pointto become mobile friendly */
-@media screen and (min-width: 800px) {
+
+@media only screen and (max-width: 700px) {
+  .imagePreview {
+    margin-top: 5px;
+  }
+  .profile-icon {
+    text-align: center;
+    margin-top: -12%;
+    width: 15%;
+    opacity: 0.5;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .registration-container {
+    width: 100%;
+  }
   .login-container {
-    max-width:40%;
+    width: 100%;
   }
 }
 
 @media screen and (min-width: 800px) {
+  .imagePreview {
+    margin-top: 5px;
+  }
+  .profile-icon {
+    text-align: center;
+    margin-top: -12%;
+    width: 20%;
+    opacity: 0.5;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .registration-container {
-    max-width:60%;
+    width: 50%;
+  }
+  .login-container {
+    width: 50%;
+  }
+  .imagePreview {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: 20px;
   }
 }
 
 .sign-in-box-card-body {
   padding: 5px;
   height: auto;
-  background-color: #759EB8;
   border-radius: 10px;
 }
 
-.sign-in-box-card {
-  background-color: #759EB8;
+.sign-in-box-card,
+.reg-box-card {
   width: 100%;
   margin: auto;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  background: #3B2113;
 }
 
-p.sign-in-text {
-  font-size: 14px;
-  font-style: italic;
-  margin-bottom: -.2%;
-  padding-left: 8px;
+.card-title {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 5%;
 }
 
 .nav-item {
-  background-color: #C5D5EA;
-  padding: 8px;
-  border-radius: 15px;
-  text-align: center;
+  color: white;
+  text-align: right;
+  padding-right: 0;
+}
+
+.form-check-label,
+.nav-item {
+  font-size: 14px;
 }
 
 .userbox {
@@ -240,12 +287,12 @@ p.sign-in-text {
 .spanerror {
   font-size: 12px;
   padding: 3px;
-  color: red;
+  color: yellow;
   display: none;
 }
 
 input:invalid[focused="true"] {
-  border: 1px solid red;
+  border: 1px solid yellow;
 }
 
 input:invalid[focused="true"] ~ span {
