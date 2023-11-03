@@ -16,7 +16,6 @@ import Footer from "./Footer";
 import Message from "./Message";
 import Progress from "./Progress";
 import { usePasswordsContext } from "../hooks/usePasswordsContext";
-import { auto } from "async";
 
 export default function UpdateProfile({
   shownav,
@@ -34,6 +33,7 @@ export default function UpdateProfile({
   const [filepreview, setFilePreview] = useState("");
 
   const [uploadedFile, setUploadedFile] = useState({});
+  const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
@@ -48,6 +48,7 @@ export default function UpdateProfile({
 
   async function submitHandler(e) {
     e.preventDefault();
+    setSubmitting(true);
 
     const enteredLastname = formLastnameRef.current.value;
     const enteredFirstname = formFirstnameRef.current.value;
@@ -97,88 +98,95 @@ export default function UpdateProfile({
   return (
     <>
       <NavBar />
-      <Container style={{ marginTop: 100 }}>
-        <Card className="update-profile-box">
-          <Card.Header className="card-header text-center text-white">
-            <h3>Update User Profile</h3>
-          </Card.Header>
-          <Card.Body>
-            {message ? <Message msg={message} /> : null}
-            <Form onSubmit={submitHandler}>
-              <Row>
-                <Col lg={true}>
-                  <Form.Group className="mb-3" controlId="formFirstname">
-                    <Form.Label>Firstname</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder={userdata.firstname}
-                      ref={formFirstnameRef}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-                <Col lg={true}>
-                  <Form.Group className="mb-3" controlId="formLastname">
-                    <Form.Label>Lastname</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder={userdata.lastname}
-                      ref={formLastnameRef}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
+      <div>
+        <Container className="update-profile-container">
+          <Card className="update-profile-box">
+            <Card.Body>
+              {message ? <Message msg={message} /> : null}
+              <img
+                className="profile-icon"
+                src="../user.png"
+                alt="profile icon"
+              />
 
-              <Row>
-                <Col lg={8}>
-                  <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label>Upload Photo</Form.Label>
+              <Card.Title className="text-center text-white">
+                <h3 style={{ marginTop: "-3%" }}>Update User Profile</h3>
+              </Card.Title>
 
-                    <Form.Control type="file" onChange={onChange} required />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  {uploadedFile ? (
-                    <div className="mt-4 mb-4 image-preview-box">
+              <Form onSubmit={submitHandler}>
+                <Row>
+                  <Col lg={true}>
+                    <Form.Group
+                      className="mb-3 text-white"
+                      controlId="formFirstname"
+                    >
+                      <Form.Label>Firstname</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder={userdata.firstname}
+                        ref={formFirstnameRef}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg={true}>
+                    <Form.Group
+                      className="mb-3 text-white"
+                      controlId="formLastname"
+                    >
+                      <Form.Label>Lastname</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder={userdata.lastname}
+                        ref={formLastnameRef}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col lg={filepreview ? 10 : 12}>
+                    <Form.Group
+                      controlId="formFile"
+                      className="mb-3 text-white"
+                    >
+                      <Form.Label>Upload Photo</Form.Label>
+                      <Form.Control type="file" onChange={onChange} />
+                    </Form.Group>
+                  </Col>
+
+                  {filepreview && (
+                    <Col lg={1}>
                       <img
+                        className="imagePreview "
                         src={filepreview}
-                        style={{
-                          border: "1px solid #ddd",
-                          borderRadius: "50%",
-                          width: "200px",
-                          height: "200px",
-                        }}
                         alt="preview"
                       />
-                    </div>
-                  ) : null}
-                </Col>
-              </Row>
+                    </Col>
+                  )}
+                </Row>
+                {submitting && <Progress percentage={uploadPercentage} />}
+                <div style={{ color: "yellow" }}>{error}</div>
 
-              <Progress percentage={uploadPercentage} />
-              {error}
-              <div className="mt-3 d-grid">
-                <Button
-                  style={{
-                    padding: "8px",
-                    borderRadius: "15px",
-                    backgroundColor: "#C5D5EA",
-                  }}
-                  variant="light"
-                  type="submit"
-                >
-                  Submit
-                </Button>
-              </div>
-            </Form>
-          </Card.Body>
-        </Card>
-      </Container>
-
-      <footer>
-        <Footer />
-      </footer>
+                <div className="mt-3 d-grid">
+                  <Button
+                    style={{
+                      padding: "8px",
+                      borderRadius: "15px",
+                      backgroundColor: "#C5D5EA",
+                    }}
+                    variant="light"
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Container>
+      </div>
     </>
   );
 }

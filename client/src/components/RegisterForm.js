@@ -202,7 +202,7 @@ export default function RegisterForm() {
                 <Col lg={filepreview ? 10 : 12}>
                   <Form.Group controlId="formFile" className="mb-3 text-white">
                     <Form.Label>Upload Photo</Form.Label>
-                    <Form.Control type="file" onChange={onChange} required />
+                    <Form.Control type="file" onChange={onChange} />
                   </Form.Group>
                 </Col>
 
@@ -220,10 +220,13 @@ export default function RegisterForm() {
               <div style={{ color: "yellow" }}>{error}</div>
               <div className="mt-3 d-grid">
                 <Button
-                  className="text-white"
+                  style={{
+                    padding: "8px",
+                    borderRadius: "15px",
+                    backgroundColor: "#C5D5EA",
+                  }}
                   variant="light"
                   type="submit"
-                  style={{ backgroundColor: "#03989e" }}
                 >
                   Submit
                 </Button>

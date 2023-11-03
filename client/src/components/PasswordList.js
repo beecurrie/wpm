@@ -44,7 +44,7 @@ function PasswordList() {
         // console.log(email);
         const response = await axios.get("/api/wpm/allpasswords/" + email);
 
-        console.log("Client side: ", response.data);
+        // console.log("Client side: ", response.data);
         dispatch({ type: "SET_PASSWORDS", payload: response.data }); //now using 'dispatch' for global state management -- 19-Oct-23
       } catch (err) {
         console.log(err);
