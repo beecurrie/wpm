@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Button from "react-bootstrap/Button";
@@ -8,9 +8,9 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/esm/Container";
+import Nav from "react-bootstrap/Nav";
 
 import Card from "react-bootstrap/Card";
-import Stack from "react-bootstrap/esm/Stack";
 
 export default function ForgotPassword() {
   const formEmailRef = useRef();
@@ -112,9 +112,22 @@ export default function ForgotPassword() {
     }
   }
   return (
-    <Container fluid>
+    <Container className="login-container">
+      <Nav.Item style={{backgroundColor: "black"}}>
+          <Nav.Link href="/">
+            <div className="logo-forgot">
+              <img
+                src="../WPM_Logo.png"
+                alt="Upper left logo"
+                align="left"
+                width="200"
+                height="50"
+              />
+            </div>
+          </Nav.Link>
+        </Nav.Item>
       <Row>
-        <Col sm={4} className="m-auto mt-5">
+        <Col className="m-auto">
           <div>
             {errorMessage && (
               <div
@@ -125,29 +138,21 @@ export default function ForgotPassword() {
               </div>
             )}
           </div>
-          <Card>
-            <Card.Header className="bg-primary text-center text-white">
-              <Stack direction="horizontal">
-                <NavLink to="/">
-                  <img
-                    src="../SOS_Logo1.png"
-                    alt="Upper right logo"
-                    align="left"
-                    width={50}
-                    height={50}
-                  />
-                </NavLink>
+          </Col>
+          </Row>
+
+          <Card className="forgot-pass-box-card">
+            <Card.Header className="card-header text-center text-black">
                 <h3 className="m-auto">Forgot Password</h3>
-              </Stack>
             </Card.Header>
-            <Card.Body>
+            <Card.Body className="forgot-pass-box-body">
               <Form onSubmit={submitHandlerEmail}>
-                <Row className="mt-3">
+                <Row className="mb-3">
                   <Col>
                     <Form.Group className="mb-3" controlId="formEmail">
                       <Form.Control
                         type="email"
-                        placeholder="email address"
+                        placeholder="Email Address"
                         ref={formEmailRef}
                         required
                         disabled={verifycode}
@@ -156,13 +161,14 @@ export default function ForgotPassword() {
                     </Form.Group>
                   </Col>
                   <Col>
-                    <div className="d-grid">
+                    <div className="d-grid gap-2">
                       <Button
                         style={{
                           padding: "8px",
                           borderRadius: "15px",
+                          backgroundColor: "#C5D5EA",
                         }}
-                        variant="primary"
+                        variant="light"
                         type="submit"
                         disabled={verifycode}
                       >
@@ -193,8 +199,9 @@ export default function ForgotPassword() {
                           style={{
                             padding: "8px",
                             borderRadius: "15px",
+                            backgroundColor: "#C5D5EA",
                           }}
-                          variant="primary"
+                          variant="light"
                           type="submit"
                           disabled={isverified}
                         >
@@ -248,8 +255,9 @@ export default function ForgotPassword() {
                             style={{
                               padding: "8px",
                               borderRadius: "15px",
+                              backgroundColor: "#C5D5EA",
                             }}
-                            variant="primary"
+                            variant="light"
                             type="submit"
                           >
                             Submit
@@ -262,8 +270,6 @@ export default function ForgotPassword() {
               )}
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
     </Container>
   );
 }
