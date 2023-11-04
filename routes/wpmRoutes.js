@@ -31,6 +31,7 @@ const {
   resetPassword,
   getUsers,
   deleteUser,
+  checkPassword,
 } = require("../controllers/wpmController");
 
 const storage = multer.memoryStorage(); //this is a good way to minimize file saving into the disk - just save it into memory as a buffer
@@ -119,6 +120,9 @@ router.get("/login-failure", (req, res, next) => {
   // res.send("You entered the wrong password.");
   res.json(user);
 });
+
+//Check user password
+router.post("/checkpasswd/", isAuth, checkPassword);
 
 //Change user password
 router.post("/passwd", isAuth, changePassword);

@@ -125,6 +125,7 @@ export default function UpdateProfile({
                         type="text"
                         placeholder={userdata.firstname}
                         ref={formFirstnameRef}
+                        required
                       />
                     </Form.Group>
                   </Col>
@@ -140,6 +141,7 @@ export default function UpdateProfile({
                         type="text"
                         placeholder={userdata.lastname}
                         ref={formLastnameRef}
+                        required
                       />
                     </Form.Group>
                   </Col>
@@ -152,7 +154,7 @@ export default function UpdateProfile({
                       className="mb-3 text-white"
                     >
                       <Form.Label>Upload Photo</Form.Label>
-                      <Form.Control type="file" onChange={onChange} />
+                      <Form.Control type="file" onChange={onChange} required />
                     </Form.Group>
                   </Col>
 

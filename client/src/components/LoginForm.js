@@ -41,7 +41,7 @@ export default function LoginForm() {
         email: enteredEmail,
         password: enteredPassword,
       });
-      console.log(response.data);
+      // console.log(response.data);
       setUser(response.data);
       if (response.data.auth) {
         localStorage.setItem("auth", "true");

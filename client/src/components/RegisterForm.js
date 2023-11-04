@@ -213,7 +213,7 @@ export default function RegisterForm() {
                 controlId="formRePassword"
               >
                 <Form.Label>Re-type Password</Form.Label>
-                <InputGroup className="mb-3 text-white">
+                <InputGroup>
                   <Form.Control
                     type={passtype1}
                     placeholder="Re-type password"

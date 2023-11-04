@@ -290,6 +290,17 @@ const deleteUser = async (req, res) => {
   res.status(200).json(user);
 };
 
+const checkPassword = async (req, res) => {
+  console.log("chkpasswd body: ", req.body);
+  try {
+    await Users.login(req.body.email, req.body.oldpassword);
+    console.log("valid password");
+    res.status(200).json({ isValid: true });
+  } catch (error) {
+    res.status(401).json({ isValid: false });
+  }
+};
+
 const changePassword = async (req, res) => {
   const { email, password, oldpassword } = req.body;
 
@@ -496,4 +507,5 @@ module.exports = {
   resetPassword,
   getUsers,
   deleteUser,
+  checkPassword,
 };
