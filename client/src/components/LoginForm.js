@@ -91,7 +91,7 @@ export default function LoginForm() {
                 <Col lg={true}>
                   <Form.Control
                     type="email"
-                    placeholder="Username"
+                    placeholder="email"
                     ref={formEmailRef}
                   />
                 </Col>
@@ -102,7 +102,7 @@ export default function LoginForm() {
                 <InputGroup className="mb-3">
                   <Form.Control
                     type={passtype}
-                    placeholder="Password"
+                    placeholder="password"
                     ref={formPasswordRef}
                   />
                   <InputGroup.Text>
@@ -141,7 +141,7 @@ export default function LoginForm() {
             <Row className="mt-2">
               <Col>
                 <Nav.Link style={{ color: "white" }} href="/register">
-                  No account yet? REGISTER HERE
+                  No account? REGISTER
                 </Nav.Link>
               </Col>
               <Col>

@@ -130,13 +130,9 @@ input:invalid[focused="true"] ~ span {
   float: left;
 }
 
-.login-form {
-  padding: 5% 10% 10% 10%;
-}
-
 .logo-registration {
   width: 100%;
-  padding-bottom: 5%;
+  padding-bottom: 1%;
   float: left;
 }
 
@@ -255,6 +251,13 @@ input:invalid[focused="true"] ~ span {
   .imagePreview {
     margin-top: 5px;
   }
+  .login-form {
+    padding: 1%;
+  }
+
+  .login-container {
+    margin-top: 20px;
+  }
   .profile-icon {
     text-align: center;
     margin-top: -12%;
@@ -265,7 +268,9 @@ input:invalid[focused="true"] ~ span {
   }
   .registration-container,
   .login-container,
-  .update-profile-container {
+  .update-profile-container,
+  .sign-in-box-card,
+  .sign-in-box-card-body {
     width: 100%;
   }
 }
@@ -276,8 +281,8 @@ input:invalid[focused="true"] ~ span {
   }
   .profile-icon {
     text-align: center;
-    margin-top: -12%;
-    width: 20%;
+    margin-top: -7%;
+    width: 10%;
     opacity: 0.5;
     margin-left: auto;
     margin-right: auto;
@@ -285,9 +290,13 @@ input:invalid[focused="true"] ~ span {
   .registration-container {
     width: 40%;
   }
+  .login-form {
+    padding: 3%;
+  }
+
   .login-container,
   .forgot-password-container {
-    width: 50%;
+    width: 30%;
   }
 
   .forgot-password-container {
@@ -303,6 +312,10 @@ input:invalid[focused="true"] ~ span {
     width: 60px;
     height: 60px;
     margin-top: 20px;
+  }
+
+  .login-container {
+    margin-top: 50px;
   }
 }
 
