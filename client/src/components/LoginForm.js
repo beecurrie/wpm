@@ -12,6 +12,12 @@ import CardBody from "react-bootstrap/esm/CardBody";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 
+import InputGroup from "react-bootstrap/InputGroup";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+
 //Login Screen
 export default function LoginForm() {
   const formEmailRef = useRef();
@@ -19,6 +25,8 @@ export default function LoginForm() {
 
   const [user, setUser] = useState(null);
   const [msg, setMsg] = useState("");
+
+  const [passtype, setPassType] = useState("password");
 
   const navigate = useNavigate();
 
@@ -91,13 +99,24 @@ export default function LoginForm() {
             </Row>
             <Row>
               <Col lg={true}>
-                <Form.Group className="mb-3" controlId="formPassword">
+                <InputGroup className="mb-3">
                   <Form.Control
-                    type="password"
+                    type={passtype}
                     placeholder="Password"
                     ref={formPasswordRef}
                   />
-                </Form.Group>
+                  <InputGroup.Text>
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon={passtype !== "password" ? faEyeSlash : faEye}
+                      onClick={() => {
+                        setPassType(
+                          passtype == "password" ? "text" : "password"
+                        );
+                      }}
+                    />
+                  </InputGroup.Text>
+                </InputGroup>
               </Col>
             </Row>
             <Row>

@@ -14,6 +14,10 @@ import Nav from "react-bootstrap/Nav";
 import Message from "./Message";
 import Progress from "./Progress";
 
+import InputGroup from "react-bootstrap/InputGroup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+
 export default function RegisterForm() {
   const formEmailRef = useRef();
   const formPasswordRef = useRef();
@@ -33,6 +37,9 @@ export default function RegisterForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [password, setPassword] = useState("");
+
+  const [passtype, setPassType] = useState("password");
+  const [passtype1, setPassType1] = useState("password");
 
   const handleFocus = async (e) => {
     setFocused(true);
@@ -171,15 +178,31 @@ export default function RegisterForm() {
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3 text-white" controlId="formPassword">
+              <Form.Group className="mb-3 text-white" controlId="formLastname">
                 <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  ref={formPasswordRef}
-                  required
-                  onChange={(e) => setPassword({ val: e.target.value })}
-                />
+                <InputGroup
+                  className="mb-3 text-white"
+                  controlId="formPassword"
+                >
+                  <Form.Control
+                    type={passtype}
+                    placeholder="Password"
+                    ref={formPasswordRef}
+                    required
+                    onChange={(e) => setPassword({ val: e.target.value })}
+                  />
+                  <InputGroup.Text>
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon={passtype !== "password" ? faEyeSlash : faEye}
+                      onClick={() => {
+                        setPassType(
+                          passtype == "password" ? "text" : "password"
+                        );
+                      }}
+                    />
+                  </InputGroup.Text>
+                </InputGroup>
               </Form.Group>
 
               <Form.Group
@@ -187,15 +210,28 @@ export default function RegisterForm() {
                 controlId="formRePassword"
               >
                 <Form.Label>Re-type Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Re-type password"
-                  ref={formRePasswordRef}
-                  pattern={password.val}
-                  onBlur={checkPassword}
-                  focused={focused.toString()}
-                  required
-                />
+                <InputGroup className="mb-3 text-white">
+                  <Form.Control
+                    type={passtype1}
+                    placeholder="Re-type password"
+                    ref={formRePasswordRef}
+                    pattern={password.val}
+                    onBlur={checkPassword}
+                    focused={focused.toString()}
+                    required
+                  />
+                  <InputGroup.Text>
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon={passtype1 !== "password" ? faEyeSlash : faEye}
+                      onClick={() => {
+                        setPassType1(
+                          passtype1 == "password" ? "text" : "password"
+                        );
+                      }}
+                    />
+                  </InputGroup.Text>
+                </InputGroup>
                 <span className="spanerror">{passwordMessage}</span>
               </Form.Group>
               <Row>

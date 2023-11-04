@@ -10,6 +10,11 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/esm/Container";
 import NavBar from "./NavBar";
 import Card from "react-bootstrap/Card";
+import InputGroup from "react-bootstrap/InputGroup";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function ChangePassword() {
   const formOldPasswordRef = useRef();
@@ -21,6 +26,9 @@ export default function ChangePassword() {
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [passtype, setPassType] = useState("password");
+  const [passtype1, setPassType1] = useState("password");
+  const [passtype2, setPassType2] = useState("password");
 
   const navigate = useNavigate();
 
@@ -30,9 +38,9 @@ export default function ChangePassword() {
 
   const checkPassword = (e) => {
     if (password !== e.target.value) {
-      e.target.setCustomValidity("Invalid field."); //forcefully set the :invalid pseudo CSS
+      e.target.setCustomValidity("Passwords don't match!"); //forcefully set the :invalid pseudo CSS
       setFocused(true);
-      setPasswordMessage("Passwords don't match!");
+      setErrorMessage("Passwords don't match!");
     } else {
       e.target.setCustomValidity(""); //restores :valid pseudo CSS
       setFocused(false);
@@ -46,7 +54,7 @@ export default function ChangePassword() {
     const enteredOldPassword = formOldPasswordRef.current.value;
 
     try {
-      const response = await axios.post("/api/sos/passwd", {
+      const response = await axios.post("/api/wpm/passwd", {
         email: enteredEmail,
         password: enteredPassword,
         oldpassword: enteredOldPassword,
@@ -67,59 +75,89 @@ export default function ChangePassword() {
       <NavBar />
       <Row>
         <Col sm={4} className="m-auto mt-5">
-          <div className="h1-login">
-            {errorMessage && (
-              <div className="ms-auto text-danger">{errorMessage}</div>
-            )}
-          </div>
-          <Card style={{backgroundColor: "#759EB8"}}>
+          <Card style={{ backgroundColor: "#3b2113" }}>
             <Card.Header className="card-header text-center text-black">
-              <h3>Change Password</h3>
+              <h3 className="text-white">Change Password</h3>
+              {errorMessage && (
+                <p style={{ color: "yellow" }}>{errorMessage}</p>
+              )}
             </Card.Header>
+            {}
             <Card.Body>
               <Form onSubmit={submitHandler}>
                 <Row className="mt-3">
                   <Col lg={true}>
-                    <Form.Group className="mb-3" controlId="formEmail">
-                      <Form.Label>Old Password</Form.Label>
+                    <InputGroup className="mb-3 text-white">
                       <Form.Control
-                        type="password"
+                        type={passtype}
                         placeholder="Old password"
                         ref={formOldPasswordRef}
                         required
                       />
+                      <InputGroup.Text>
+                        <FontAwesomeIcon
+                          style={{ cursor: "pointer" }}
+                          icon={passtype !== "password" ? faEyeSlash : faEye}
+                          onClick={() => {
+                            setPassType(
+                              passtype == "password" ? "text" : "password"
+                            );
+                          }}
+                        />
+                      </InputGroup.Text>
                       <span className="spanerror">{errorMessage}</span>
-                    </Form.Group>
+                    </InputGroup>
                   </Col>
                 </Row>
                 <Row>
                   <Col lg={true}>
-                    <Form.Group className="mb-3" controlId="formPassword">
-                      <Form.Label>New Password</Form.Label>
+                    <InputGroup className="mb-3 text-white">
                       <Form.Control
-                        type="password"
-                        placeholder="Password"
+                        type={passtype1}
+                        placeholder="New password"
                         ref={formPasswordRef}
                         required
                         onChange={onChange}
                       />
-                    </Form.Group>
+                      <InputGroup.Text>
+                        <FontAwesomeIcon
+                          style={{ cursor: "pointer" }}
+                          icon={passtype1 !== "password" ? faEyeSlash : faEye}
+                          onClick={() => {
+                            setPassType1(
+                              passtype1 == "password" ? "text" : "password"
+                            );
+                          }}
+                        />
+                      </InputGroup.Text>
+                    </InputGroup>
                   </Col>
                 </Row>
                 <Col lg={true}>
-                  <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Confirm Password</Form.Label>
+                  <InputGroup className="mb-3 text-white">
                     <Form.Control
-                      type="password"
-                      placeholder="Password"
+                      type={passtype2}
+                      placeholder="Re-type password"
                       ref={formRePasswordRef}
                       pattern={password}
                       onBlur={checkPassword}
                       focused={focused.toString()}
                       required
                     />
-                    <span className="spanerror">{passwordMessage}</span>
-                  </Form.Group>
+                    <InputGroup.Text>
+                      {" "}
+                      <FontAwesomeIcon
+                        style={{ cursor: "pointer" }}
+                        icon={passtype2 !== "password" ? faEyeSlash : faEye}
+                        onClick={() => {
+                          setPassType2(
+                            passtype2 == "password" ? "text" : "password"
+                          );
+                        }}
+                      />
+                    </InputGroup.Text>
+                    <div className="spanerror">{passwordMessage}</div>
+                  </InputGroup>
                 </Col>
 
                 <Row className="mt-5">
