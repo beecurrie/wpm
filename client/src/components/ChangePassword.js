@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ export default function ChangePassword() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordMessage, setPasswordMessage] = useState("");
+
   const [passtype, setPassType] = useState("password");
   const [passtype1, setPassType1] = useState("password");
   const [passtype2, setPassType2] = useState("password");
@@ -100,7 +100,7 @@ export default function ChangePassword() {
                           icon={passtype !== "password" ? faEyeSlash : faEye}
                           onClick={() => {
                             setPassType(
-                              passtype == "password" ? "text" : "password"
+                              passtype === "password" ? "text" : "password"
                             );
                           }}
                         />
@@ -125,7 +125,7 @@ export default function ChangePassword() {
                           icon={passtype1 !== "password" ? faEyeSlash : faEye}
                           onClick={() => {
                             setPassType1(
-                              passtype1 == "password" ? "text" : "password"
+                              passtype1 === "password" ? "text" : "password"
                             );
                           }}
                         />
@@ -151,12 +151,11 @@ export default function ChangePassword() {
                         icon={passtype2 !== "password" ? faEyeSlash : faEye}
                         onClick={() => {
                           setPassType2(
-                            passtype2 == "password" ? "text" : "password"
+                            passtype2 === "password" ? "text" : "password"
                           );
                         }}
                       />
                     </InputGroup.Text>
-                    <div className="spanerror">{passwordMessage}</div>
                   </InputGroup>
                 </Col>
 

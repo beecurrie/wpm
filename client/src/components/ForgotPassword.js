@@ -101,7 +101,7 @@ export default function ForgotPassword() {
     console.log("Hey!", email);
 
     try {
-      const response = await axios.post("/api/wpm/resetpwd", {
+      await axios.post("/api/wpm/resetpwd", {
         email: email,
         password: enteredPassword,
       });

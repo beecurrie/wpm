@@ -64,8 +64,11 @@ export default function RegisterForm() {
       e.target.setCustomValidity("Invalid field."); //forcefully set the :invalid pseudo CSS
       setFocused(true);
       setPasswordMessage("Passwords don't match!");
+
+      console.log("password mismatch");
     } else {
       e.target.setCustomValidity(""); //restores :valid pseudo CSS
+      setPasswordMessage("");
       setFocused(false);
     }
   };
@@ -220,6 +223,7 @@ export default function RegisterForm() {
                     focused={focused.toString()}
                     required
                   />
+
                   <InputGroup.Text>
                     <FontAwesomeIcon
                       style={{ cursor: "pointer" }}
@@ -234,6 +238,7 @@ export default function RegisterForm() {
                 </InputGroup>
                 <span className="spanerror">{passwordMessage}</span>
               </Form.Group>
+
               <Row>
                 <Col lg={filepreview ? 10 : 12}>
                   <Form.Group controlId="formFile" className="mb-3 text-white">

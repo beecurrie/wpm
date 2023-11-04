@@ -226,9 +226,8 @@ input:invalid[focused="true"] ~ span {
 
 .spanerror {
   font-size: 12px;
-  padding: 3px;
+
   color: yellow;
-  display: none;
 }
 
 .update-profile-container {

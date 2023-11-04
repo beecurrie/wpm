@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -111,7 +111,7 @@ export default function LoginForm() {
                       icon={passtype !== "password" ? faEyeSlash : faEye}
                       onClick={() => {
                         setPassType(
-                          passtype == "password" ? "text" : "password"
+                          passtype === "password" ? "text" : "password"
                         );
                       }}
                     />
