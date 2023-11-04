@@ -20,7 +20,7 @@ button {
 .bg {
   /* The image used */
 
-  background-image: url("/public/bg_green.png");
+  background-image: url("/public/background-img.jpg");
 
   /* Full height */
   height: 100%;
