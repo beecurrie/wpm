@@ -68,15 +68,15 @@ export default function LoginForm() {
 
       <Card className="sign-in-box-card">
         <CardBody className="sign-in-box-card-body">
-          {user && user.auth ? (
-            <div className="text-black">{msg}</div>
-          ) : (
-            <div className="text-danger">{msg}</div>
-          )}
-
           <img className="profile-icon" src="../user.png" alt="profile icon" />
 
           <Card.Title className="card-title">Sign In</Card.Title>
+          {user && user.auth ? (
+            <div className="text-white">{msg}</div>
+          ) : (
+            <div className="text-warning text-center">{msg}</div>
+          )}
+
           <Form className="login-form" onSubmit={submitHandler}>
             <Row className="mb-3">
               <Form.Group className="mb-3" controlId="formEmail">
@@ -122,7 +122,7 @@ export default function LoginForm() {
             <Row className="mt-2">
               <Col>
                 <Nav.Link style={{ color: "white" }} href="/register">
-                  Don't have an account yet? REGISTER HERE
+                  No account yet? REGISTER HERE
                 </Nav.Link>
               </Col>
               <Col>

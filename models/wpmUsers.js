@@ -26,6 +26,7 @@ const wpmUserSchema = new Schema(
     attachment: {
       type: String,
     },
+    userkey: { type: String },
     admin: { type: Boolean },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
@@ -66,6 +67,7 @@ wpmUserSchema.statics.signup = async function (
     lastname,
     firstname,
     attachment,
+    userkey: hash,
     admin: false,
   });
 

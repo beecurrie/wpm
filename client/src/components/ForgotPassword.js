@@ -55,7 +55,7 @@ export default function ForgotPassword() {
     console.log(enteredEmail);
 
     try {
-      const response = await axios.post("/api/sos/forgot", {
+      const response = await axios.post("/api/wpm/forgot", {
         email: enteredEmail,
       });
       console.log(response.data);
@@ -78,7 +78,7 @@ export default function ForgotPassword() {
     console.log(enteredCode);
 
     try {
-      const response = await axios.get("/api/sos/reset/" + enteredCode);
+      const response = await axios.get("/api/wpm/reset/" + enteredCode);
       console.log(response.data);
       if (response.data.token === enteredCode) {
         setIsVerified(true);
@@ -101,7 +101,7 @@ export default function ForgotPassword() {
     console.log("Hey!", email);
 
     try {
-      const response = await axios.post("/api/sos/resetpwd", {
+      const response = await axios.post("/api/wpm/resetpwd", {
         email: email,
         password: enteredPassword,
       });
@@ -112,56 +112,76 @@ export default function ForgotPassword() {
     }
   }
   return (
-    <Container className="login-container">
-      <Nav.Item style={{backgroundColor: "black"}}>
+    <div>
+      <Container className="forgot-password-container">
+        <Nav.Item>
           <Nav.Link href="/">
-            <div className="logo-forgot">
+            <div className="logo-registration">
               <img
-                src="../WPM_Logo.png"
+                src="../WPM_Security-logos_white.png"
                 alt="Upper left logo"
                 align="left"
                 width="200"
-                height="50"
+                height="120"
               />
             </div>
           </Nav.Link>
         </Nav.Item>
-      <Row>
-        <Col className="m-auto">
-          <div>
-            {errorMessage && (
-              <div
-                className="ms-auto text-bold text-center"
-                style={{ color: "red", backgroundColor: "yellow" }}
-              >
-                {errorMessage}
-              </div>
-            )}
-          </div>
-          </Col>
-          </Row>
-
-          <Card className="forgot-pass-box-card">
-            <Card.Header className="card-header text-center text-black">
-                <h3 className="m-auto">Forgot Password</h3>
-            </Card.Header>
-            <Card.Body className="forgot-pass-box-body">
-              <Form onSubmit={submitHandlerEmail}>
-                <Row className="mb-3">
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formEmail">
+        <Card className="forgot-pass-box-card">
+          <Card.Header className="card-header text-center text-black">
+            <h3 className="m-auto text-white">Forgot Password</h3>
+            {errorMessage && <p style={{ color: "yellow" }}>{errorMessage}</p>}
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={submitHandlerEmail}>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Group className="mb-3" controlId="formEmail">
+                    <Form.Control
+                      type="email"
+                      placeholder="Email Address"
+                      ref={formEmailRef}
+                      required
+                      disabled={verifycode}
+                    />
+                    <span className="spanerror">{errorMessage}</span>
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <div className="d-grid gap-2">
+                    <Button
+                      style={{
+                        padding: "8px",
+                        borderRadius: "15px",
+                        backgroundColor: "#C5D5EA",
+                      }}
+                      variant="light"
+                      type="submit"
+                      disabled={verifycode}
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
+            </Form>
+            {verifycode && (
+              <Form onSubmit={submitHandlerVerification}>
+                <Row>
+                  <Col lg={true}>
+                    <Form.Group className="mb-3" controlId="formVerification">
                       <Form.Control
-                        type="email"
-                        placeholder="Email Address"
-                        ref={formEmailRef}
+                        type="text"
+                        placeholder="Verification code"
+                        ref={formVerifyCodeRef}
                         required
-                        disabled={verifycode}
+                        onChange={onChangeCode}
+                        disabled={isverified}
                       />
-                      <span className="spanerror">{errorMessage}</span>
                     </Form.Group>
                   </Col>
                   <Col>
-                    <div className="d-grid gap-2">
+                    <div className="d-grid">
                       <Button
                         style={{
                           padding: "8px",
@@ -170,7 +190,7 @@ export default function ForgotPassword() {
                         }}
                         variant="light"
                         type="submit"
-                        disabled={verifycode}
+                        disabled={isverified}
                       >
                         Submit
                       </Button>
@@ -178,21 +198,44 @@ export default function ForgotPassword() {
                   </Col>
                 </Row>
               </Form>
-              {verifycode && (
-                <Form onSubmit={submitHandlerVerification}>
+            )}
+            {isverified && (
+              <div>
+                <Form onSubmit={submitHandler}>
                   <Row>
                     <Col lg={true}>
-                      <Form.Group className="mb-3" controlId="formVerification">
+                      <Form.Group className="mb-3" controlId="formPassword">
+                        <Form.Label>New Password</Form.Label>
                         <Form.Control
-                          type="text"
-                          placeholder="Verification code"
-                          ref={formVerifyCodeRef}
+                          type="password"
+                          placeholder="Password"
+                          ref={formPasswordRef}
                           required
-                          onChange={onChangeCode}
-                          disabled={isverified}
+                          onChange={onChange}
                         />
                       </Form.Group>
                     </Col>
+
+                    <Col lg={true}>
+                      <Form.Group
+                        className="mb-3"
+                        controlId="formConfirmPassword"
+                      >
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control
+                          type="password"
+                          placeholder="Password"
+                          ref={formRePasswordRef}
+                          pattern={password}
+                          onBlur={checkPassword}
+                          focused={focused.toString()}
+                          required
+                        />
+                        <span className="spanerror">{passwordMessage}</span>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
                     <Col>
                       <div className="d-grid">
                         <Button
@@ -203,7 +246,6 @@ export default function ForgotPassword() {
                           }}
                           variant="light"
                           type="submit"
-                          disabled={isverified}
                         >
                           Submit
                         </Button>
@@ -211,65 +253,11 @@ export default function ForgotPassword() {
                     </Col>
                   </Row>
                 </Form>
-              )}
-              {isverified && (
-                <div>
-                  <Form onSubmit={submitHandler}>
-                    <Row>
-                      <Col lg={true}>
-                        <Form.Group className="mb-3" controlId="formPassword">
-                          <Form.Label>New Password</Form.Label>
-                          <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            ref={formPasswordRef}
-                            required
-                            onChange={onChange}
-                          />
-                        </Form.Group>
-                      </Col>
-
-                      <Col lg={true}>
-                        <Form.Group
-                          className="mb-3"
-                          controlId="formConfirmPassword"
-                        >
-                          <Form.Label>Confirm Password</Form.Label>
-                          <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            ref={formRePasswordRef}
-                            pattern={password}
-                            onBlur={checkPassword}
-                            focused={focused.toString()}
-                            required
-                          />
-                          <span className="spanerror">{passwordMessage}</span>
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <div className="d-grid">
-                          <Button
-                            style={{
-                              padding: "8px",
-                              borderRadius: "15px",
-                              backgroundColor: "#C5D5EA",
-                            }}
-                            variant="light"
-                            type="submit"
-                          >
-                            Submit
-                          </Button>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Form>
-                </div>
-              )}
-            </Card.Body>
-          </Card>
-    </Container>
+              </div>
+            )}
+          </Card.Body>
+        </Card>
+      </Container>
+    </div>
   );
 }

@@ -62,21 +62,6 @@ code {
 
 /* Forgot Password */
 
-.forgot-pass-box-card {
-  background-color: #759eb8;
-  width: 100%;
-  margin: auto;
-  margin-top: 75px;
-  padding: 5px;
-}
-
-.forgot-pass-box-body {
-  padding: 5px;
-  height: auto;
-  background-color: #759eb8;
-  border-radius: 10px;
-}
-
 .forg-password-text {
   color: white;
   text-align: start;
@@ -143,10 +128,6 @@ input:invalid[focused="true"] ~ span {
   width: 10px;
   padding-top: 2%;
   float: left;
-}
-
-.login-container {
-  width: 10%;
 }
 
 .login-form {
@@ -228,11 +209,11 @@ input:invalid[focused="true"] ~ span {
   border-radius: 10px;
 }
 
+.forgot-pass-box-card,
 .sign-in-box-card,
 .reg-box-card,
 .update-profile-box {
   width: 100%;
-  margin: auto;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   background: #3b2113;
 }
@@ -302,10 +283,15 @@ input:invalid[focused="true"] ~ span {
     margin-right: auto;
   }
   .registration-container {
-    width: 30%;
+    width: 40%;
   }
-  .login-container {
+  .login-container,
+  .forgot-password-container {
     width: 50%;
+  }
+
+  .forgot-password-container {
+    margin-top: 5%;
   }
 
   .update-profile-container {

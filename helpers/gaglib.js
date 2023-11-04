@@ -25,7 +25,7 @@ module.exports = {
             path: filePath,
           },
         ],
-        from: "soshse@safenode.co.nz",
+        from: "wpm@safenode.co.nz",
         to: recvr,
         cc: "gagabon@safenode.co.nz",
         subject: subject,
@@ -33,7 +33,7 @@ module.exports = {
       };
     } else {
       var mailOptions = {
-        from: "soshse@safenode.co.nz",
+        from: "wpm@safenode.co.nz",
         to: recvr,
         cc: "gagabon@safenode.co.nz",
         subject: subject,

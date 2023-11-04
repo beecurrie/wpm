@@ -34,7 +34,16 @@ const getPasswords = async (req, res) => {
 
   const decryptedList = passwords.map((pw) => {
     // encryption key
-    const key = req.user.password;
+    // const key = req.user.password; //removed: 04-Nov-2023. Now using 'userkey' field
+    // Updated 04-Nov-2023 by Gilberto: Now using a new field 'userkey'. The 'userkey' is created during new user registration.
+    // This key contains the hashed password of the user account. I decided to put the key in a separate field because when a user do a 'Forget Password'
+    // the new password has a different hash. As a result, the user's record of saved passwords can no longer be retrieved because when it was encrypted
+    // using the hash of the old password. Now when the user changed password, of course the hash of the new user password has changed and using this new hash
+    // will not be able to open the password transactions because it's no longer the same key that was used to encrypt it.
+    // To avoid this issue and have a permanent key, I saved the key in a separate field called 'userkey' and this is initially stuffed with the hash of the
+    // user's password during registration.
+
+    const key = req.user.userkey; //updated: 04-Nov-2023 by Gilberto
 
     // encryption algorithm
     const algorithm = "aes-256-cbc";
@@ -91,7 +100,17 @@ const createPWTrans = async (req, res) => {
   // console.log(plainText);
 
   // encryption key
-  const key = req.user.password;
+
+  // const key = req.user.password; //removed: 04-Nov-2023. Now using 'userkey' field
+  // Updated 04-Nov-2023 by Gilberto: Now using a new field 'userkey'. The 'userkey' is created during new user registration.
+  // This key contains the hashed password of the user account. I decided to put the key in a separate field because when a user do a 'Forget Password'
+  // the new password has a different hash. As a result, the user's record of saved passwords can no longer be retrieved because when it was encrypted
+  // using the hash of the old password. Now when the user changed password, of course the hash of the new user password has changed and using this new hash
+  // will not be able to open the password transactions because it's no longer the same key that was used to encrypt it.
+  // To avoid this issue and have a permanent key, I saved the key in a separate field called 'userkey' and this is initially stuffed with the hash of the
+  // user's password during registration.
+
+  const key = req.user.userkey;
   console.log("key: ", key);
 
   // encryption algorithm
@@ -201,35 +220,6 @@ const getUsers = async (req, res) => {
 // create a new user
 const createUser = async (req, res) => {
   const { email, password, lastname, firstname } = req.body;
-
-  // add to the database
-  // try {
-  //   const hashedPassword = await bcrypt.hash(password, 10);
-  //   const user = await Users.create({
-  //     email,
-  //     password: hashedPassword,
-  //     lastname,
-  //     firstname,
-  //     admin: false,
-  //     attachment: req.fname, //this req.fname was added from the previous middleware
-  //   });
-  //   console.log("new user:", user);
-
-  //   var recvr = email,
-  //     subject = "Welcome " + firstname,
-  //     emailbody =
-  //       "Registration successful. You may now access the app by going to this url: https://wpm.herokuapp.com and use your username: " +
-  //       email +
-  //       " and password. \n";
-
-  //   // sendMail(recvr, subject, emailbody); //send welcome email to user --> re-activate later when the email address is setup
-
-  //   res.status(200).json({ message: "User created" });
-  // } catch (error) {
-  //   console.log(error.message);
-  //   res.status(400).json({ error: error.message });
-  //   // res.redirect("/register");
-  // }
 
   // Changes 21-Oct-2023:
   // 1. Used Mongoose Static functions. Modified Users model to include static functions for creating a user and logging-in a user
