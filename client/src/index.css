@@ -294,7 +294,7 @@ input:invalid[focused="true"] ~ span {
 
   .login-container,
   .forgot-password-container {
-    width: 30%;
+    width: 50%;
   }
 
   .forgot-password-container {

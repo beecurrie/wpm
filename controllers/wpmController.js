@@ -111,7 +111,7 @@ const createPWTrans = async (req, res) => {
   // user's password during registration.
 
   const key = req.user.userkey;
-  console.log("key: ", key);
+  // console.log("key: ", key);
 
   // encryption algorithm
   const algorithm = "aes-256-cbc";
@@ -134,7 +134,7 @@ const createPWTrans = async (req, res) => {
     });
     pwtrans.password = plainText; //return the plain text to client similar to the getPasswords() code
     // pwtrans.id = _id;
-    console.log("pwtrans: ", pwtrans);
+    // console.log("pwtrans: ", pwtrans);
     res.status(200).json(pwtrans);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -213,7 +213,7 @@ const showImage = (req, res) => {
 // get all users
 const getUsers = async (req, res) => {
   const users = await Users.find({}).sort({ lastname: -1 });
-  console.log("server side users: ", users);
+  // console.log("server side users: ", users);
   res.status(200).json(users);
 };
 
@@ -236,7 +236,7 @@ const createUser = async (req, res) => {
 
     //create token
     const token = createToken(user._id, email, lastname, firstname);
-    console.log(token);
+    // console.log(token);
     res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -265,7 +265,7 @@ const updateUser = async (req, res) => {
       attachment: req.fname, //attachment field
       auth: true,
     };
-    console.log("updated user:", updateduser);
+    // console.log("updated user:", updateduser);
     res.status(200).json(updateduser);
   } catch (error) {
     console.log(error);
@@ -291,10 +291,10 @@ const deleteUser = async (req, res) => {
 };
 
 const checkPassword = async (req, res) => {
-  console.log("chkpasswd body: ", req.body);
+  // console.log("chkpasswd body: ", req.body);
   try {
     await Users.login(req.body.email, req.body.oldpassword);
-    console.log("valid password");
+    // console.log("valid password");
     res.status(200).json({ isValid: true });
   } catch (error) {
     res.status(401).json({ isValid: false });
@@ -309,7 +309,7 @@ const changePassword = async (req, res) => {
     const userpassword = await Users.findOne({ email }); //get user information first including password
     const isValid = bcrypt.compareSync(oldpassword, userpassword.password); //compare stored password with the hashed password passed from the client side
     if (isValid) {
-      console.log("Valid password");
+      // console.log("Valid password");
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await Users.findOneAndUpdate(
         { email },
@@ -318,10 +318,10 @@ const changePassword = async (req, res) => {
         },
         { new: true }
       );
-      console.log("password updated for users:", user);
+      // console.log("password updated for users:", user);
       res.status(200).json({ valid: true, message: "password updated" });
     } else {
-      console.log("Invalid password");
+      // console.log("Invalid password");
       res.status(200).json({ valid: false, message: "wrong password entered" });
     }
   } catch (error) {
@@ -483,7 +483,7 @@ const resetPassword = async (req, res) => {
       },
       { new: true }
     );
-    console.log("password updated for user:", user);
+    // console.log("password updated for user:", user);
     res.status(200).json({ valid: true, message: "password updated" });
   } catch (error) {
     console.log(error);

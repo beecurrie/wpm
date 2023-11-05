@@ -10,10 +10,9 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/esm/Container";
 import NavBar from "./NavBar";
 import Card from "react-bootstrap/Card";
+
 import InputGroup from "react-bootstrap/InputGroup";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function ChangePassword() {

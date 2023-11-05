@@ -9,8 +9,11 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/esm/Container";
 import Nav from "react-bootstrap/Nav";
-
 import Card from "react-bootstrap/Card";
+
+import InputGroup from "react-bootstrap/InputGroup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function ForgotPassword() {
   const formEmailRef = useRef();
@@ -26,6 +29,9 @@ export default function ForgotPassword() {
   const [isverified, setIsVerified] = useState(false);
   const [email, setEmail] = useState("");
 
+  const [passtype, setPassType] = useState("password");
+  const [passtype1, setPassType1] = useState("password");
+
   const navigate = useNavigate();
 
   function onChange(e) {
@@ -38,11 +44,12 @@ export default function ForgotPassword() {
 
   const checkPassword = (e) => {
     if (password !== e.target.value) {
-      e.target.setCustomValidity("Invalid field."); //forcefully set the :invalid pseudo CSS
+      e.target.setCustomValidity("Passwords don't match!"); //forcefully set the :invalid pseudo CSS
       setFocused(true);
-      setPasswordMessage("Passwords don't match!");
+      setErrorMessage("Passwords don't match!");
     } else {
       e.target.setCustomValidity(""); //restores :valid pseudo CSS
+      setErrorMessage("");
       setFocused(false);
     }
   };
@@ -144,7 +151,6 @@ export default function ForgotPassword() {
                       required
                       disabled={verifycode}
                     />
-                    <span className="spanerror">{errorMessage}</span>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -204,34 +210,66 @@ export default function ForgotPassword() {
                 <Form onSubmit={submitHandler}>
                   <Row>
                     <Col lg={true}>
-                      <Form.Group className="mb-3" controlId="formPassword">
+                      <Form.Group
+                        className="mb-3 text-white"
+                        controlId="formPassword"
+                      >
                         <Form.Label>New Password</Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="Password"
-                          ref={formPasswordRef}
-                          required
-                          onChange={onChange}
-                        />
+                        <InputGroup>
+                          <Form.Control
+                            type={passtype}
+                            placeholder="Password"
+                            ref={formPasswordRef}
+                            required
+                            onChange={onChange}
+                          />
+                          <InputGroup.Text>
+                            <FontAwesomeIcon
+                              style={{ cursor: "pointer" }}
+                              icon={
+                                passtype !== "password" ? faEyeSlash : faEye
+                              }
+                              onClick={() => {
+                                setPassType(
+                                  passtype === "password" ? "text" : "password"
+                                );
+                              }}
+                            />
+                          </InputGroup.Text>
+                        </InputGroup>
                       </Form.Group>
                     </Col>
 
                     <Col lg={true}>
                       <Form.Group
-                        className="mb-3"
+                        className="mb-3 text-white"
                         controlId="formConfirmPassword"
                       >
                         <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="Password"
-                          ref={formRePasswordRef}
-                          pattern={password}
-                          onBlur={checkPassword}
-                          focused={focused.toString()}
-                          required
-                        />
-                        <span className="spanerror">{passwordMessage}</span>
+                        <InputGroup>
+                          <Form.Control
+                            type={passtype1}
+                            placeholder="Password"
+                            ref={formRePasswordRef}
+                            pattern={password}
+                            onBlur={checkPassword}
+                            focused={focused.toString()}
+                            required
+                          />
+                          <InputGroup.Text>
+                            <FontAwesomeIcon
+                              style={{ cursor: "pointer" }}
+                              icon={
+                                passtype1 !== "password" ? faEyeSlash : faEye
+                              }
+                              onClick={() => {
+                                setPassType1(
+                                  passtype1 === "password" ? "text" : "password"
+                                );
+                              }}
+                            />
+                          </InputGroup.Text>
+                        </InputGroup>
                       </Form.Group>
                     </Col>
                   </Row>
