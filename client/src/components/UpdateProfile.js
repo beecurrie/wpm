@@ -9,11 +9,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
-import Nav from "react-bootstrap/Nav";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
 
-import Message from "./Message";
+import NavBar from "./NavBar";
+
 import Progress from "./Progress";
 import { usePasswordsContext } from "../hooks/usePasswordsContext";
 
@@ -32,9 +30,8 @@ export default function UpdateProfile({
   const [file, setFile] = useState("");
   const [filepreview, setFilePreview] = useState("");
 
-  const [uploadedFile, setUploadedFile] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [message, setMessage] = useState("");
+
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const { usersList, dispatch } = usePasswordsContext(); //using global state management via context
@@ -102,7 +99,6 @@ export default function UpdateProfile({
         <Container className="update-profile-container">
           <Card className="update-profile-box">
             <Card.Body>
-              {message ? <Message msg={message} /> : null}
               <img
                 className="profile-icon"
                 src="../user.png"

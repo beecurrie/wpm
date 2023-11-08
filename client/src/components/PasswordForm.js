@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 import { Breakpoint } from "react-socks"; //added: 21-Oct-23 by GAG
@@ -12,8 +12,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEdit,
-  faEraser,
   faCirclePlus,
   faEyeSlash,
   faEye,
@@ -22,7 +20,7 @@ import {
 import { usePasswordsContext } from "../hooks/usePasswordsContext";
 
 function PasswordForm() {
-  const { passwords, dispatch } = usePasswordsContext();
+  const { dispatch } = usePasswordsContext();
 
   const [show, setShow] = useState(false);
   const [passtype, setPassType] = useState("password");
@@ -40,7 +38,7 @@ function PasswordForm() {
   const [error, setError] = useState(null);
 
   const [focused, setFocused] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+
   const [passwordMessage, setPasswordMessage] = useState("");
   const [password, setPassword] = useState("");
 
@@ -55,8 +53,6 @@ function PasswordForm() {
       setFocused(false);
     }
   };
-
-  const navigate = useNavigate();
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -132,7 +128,7 @@ function PasswordForm() {
                   required
                   focused={focused.toString()}
                 />
-                <span className="newpass-error">{errorMessage}</span>
+                <span className="newpass-error">{passwordMessage}</span>
               </Form.Group>
             </Col>
             <Col lg={true}>

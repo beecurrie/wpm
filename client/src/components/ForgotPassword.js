@@ -24,7 +24,7 @@ export default function ForgotPassword() {
   const [focused, setFocused] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordMessage, setPasswordMessage] = useState("");
+
   const [verifycode, setVerifyCode] = useState(false);
   const [isverified, setIsVerified] = useState(false);
   const [email, setEmail] = useState("");

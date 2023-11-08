@@ -11,7 +11,6 @@ import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 
-import Message from "./Message";
 import Progress from "./Progress";
 
 import InputGroup from "react-bootstrap/InputGroup";
@@ -29,7 +28,6 @@ export default function RegisterForm() {
   const [file, setFile] = useState("");
   const [filepreview, setFilePreview] = useState(null);
 
-  const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [submitting, setSubmitting] = useState(false);
 
@@ -43,7 +41,7 @@ export default function RegisterForm() {
 
   const handleFocus = async (e) => {
     setFocused(true);
-    setErrorMessage("Invalid email");
+
     try {
       const response = await axios.get("/api/wpm/user/" + e.target.value);
 
@@ -53,6 +51,7 @@ export default function RegisterForm() {
         setErrorMessage("Email already registered!");
       } else {
         e.target.setCustomValidity(""); //restores :valid pseudo CSS
+        setErrorMessage("");
       }
     } catch (error) {
       console.log(error);
@@ -99,7 +98,7 @@ export default function RegisterForm() {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("/api/wpm/register", formData, {
+      await axios.post("/api/wpm/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -111,8 +110,6 @@ export default function RegisterForm() {
           );
         },
       });
-
-      // console.log("response: ", response.data);
 
       navigate("/", { replace: true });
     } catch (err) {
@@ -139,8 +136,6 @@ export default function RegisterForm() {
         </Nav.Item>
         <Card className="reg-box-card">
           <Card.Body>
-            {message ? <Message msg={message} /> : null}
-
             <img
               className="profile-icon"
               src="../user.png"
@@ -200,7 +195,7 @@ export default function RegisterForm() {
                       icon={passtype !== "password" ? faEyeSlash : faEye}
                       onClick={() => {
                         setPassType(
-                          passtype == "password" ? "text" : "password"
+                          passtype === "password" ? "text" : "password"
                         );
                       }}
                     />
@@ -230,7 +225,7 @@ export default function RegisterForm() {
                       icon={passtype1 !== "password" ? faEyeSlash : faEye}
                       onClick={() => {
                         setPassType1(
-                          passtype1 == "password" ? "text" : "password"
+                          passtype1 === "password" ? "text" : "password"
                         );
                       }}
                     />
