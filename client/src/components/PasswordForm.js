@@ -8,12 +8,15 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
+import InputGroup from "react-bootstrap/InputGroup";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
   faEraser,
   faCirclePlus,
+  faEyeSlash,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { usePasswordsContext } from "../hooks/usePasswordsContext";
@@ -22,6 +25,8 @@ function PasswordForm() {
   const { passwords, dispatch } = usePasswordsContext();
 
   const [show, setShow] = useState(false);
+  const [passtype, setPassType] = useState("password");
+  const [passtype1, setPassType1] = useState("password");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -46,6 +51,7 @@ function PasswordForm() {
       setPasswordMessage("Passwords don't match!");
     } else {
       e.target.setCustomValidity(""); //restores :valid pseudo CSS
+      setPasswordMessage("");
       setFocused(false);
     }
   };
@@ -126,34 +132,61 @@ function PasswordForm() {
                   required
                   focused={focused.toString()}
                 />
-                <span className="spanerror">{errorMessage}</span>
+                <span className="newpass-error">{errorMessage}</span>
               </Form.Group>
             </Col>
             <Col lg={true}>
               <Form.Group className="mb-3" controlId="formPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  ref={formPasswordRef}
-                  required
-                  onChange={(e) => setPassword({ val: e.target.value })}
-                />
+                <InputGroup>
+                  <Form.Control
+                    type={passtype}
+                    placeholder="Password"
+                    ref={formPasswordRef}
+                    required
+                    onChange={(e) => setPassword({ val: e.target.value })}
+                  />
+                  <InputGroup.Text>
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon={passtype !== "password" ? faEyeSlash : faEye}
+                      onClick={() => {
+                        setPassType(
+                          passtype === "password" ? "text" : "password"
+                        );
+                      }}
+                    />
+                  </InputGroup.Text>
+                </InputGroup>
               </Form.Group>
             </Col>
             <Col lg={true}>
               <Form.Group className="mb-3" controlId="formRePassword">
                 <Form.Label>Re-type Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Re-type password"
-                  ref={formRePasswordRef}
-                  pattern={password.val}
-                  onBlur={checkPassword}
-                  focused={focused.toString()}
-                  required
-                />
-                <span className="spanerror">{passwordMessage}</span>
+                <InputGroup>
+                  <Form.Control
+                    type={passtype1}
+                    placeholder="Re-type password"
+                    ref={formRePasswordRef}
+                    pattern={password.val}
+                    onBlur={checkPassword}
+                    focused={focused.toString()}
+                    required
+                  />
+                  <InputGroup.Text>
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon={passtype1 !== "password" ? faEyeSlash : faEye}
+                      onClick={() => {
+                        setPassType1(
+                          passtype1 === "password" ? "text" : "password"
+                        );
+                      }}
+                    />
+                  </InputGroup.Text>
+                </InputGroup>
+
+                <span className="newpass-error">{passwordMessage}</span>
               </Form.Group>
             </Col>
 
