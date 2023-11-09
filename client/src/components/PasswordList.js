@@ -1,16 +1,16 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 import { Breakpoint } from "react-socks"; //added: 21-Oct-23 by GAG
 
-import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
-import Stack from "react-bootstrap/Stack";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 
 import PasswordForm from "./PasswordForm";
 
@@ -21,7 +21,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
   faEraser,
-  faCirclePlus,
   faEye,
   faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +28,21 @@ import { auto } from "async";
 
 function PasswordList() {
   const { passwords, dispatch } = usePasswordsContext();
+
+  const [editshow, setShow] = useState(false);
+  const [passtype, setPassType] = useState("password");
+  const [passtype1, setPassType1] = useState("password");
+
+  const handleClose = () => setShow(false);
+
+  const formUsernameRef = useRef();
+  const formPasswordRef = useRef();
+  const formRePasswordRef = useRef();
+  const [error] = useState(null);
+  const [focused] = useState(false);
+  const [passwordMessage] = useState("");
+
+  const [password, setPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -60,6 +74,7 @@ function PasswordList() {
     setShowPassword(!showPassword);
   };
 
+
   const handleDelClose = () => setDelShow(false);
   // const handleEditClose = () => setUndercons(false);
 
@@ -77,6 +92,7 @@ function PasswordList() {
 
   const handleClickEdit = (id) => {
     console.log("Clicked Edit button on ID: ", id);
+    setShow(true);
   };
 
   const handleClickDelete = (id) => {
@@ -211,6 +227,99 @@ function PasswordList() {
           </Modal.Footer>
         </Modal>
       </Container>
+
+      <Container>  
+        <Modal className="edit-pass-modal" show={editshow} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit>
+            <Col lg={true}>
+              <Form.Group className="mb-3" controlId="formEmail">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="username"
+                  ref={formUsernameRef}
+                  required
+                  focused={focused.toString()}
+                />
+                <span className="newpass-error">{passwordMessage}</span>
+              </Form.Group>
+            </Col>
+            <Col lg={true}>
+              <Form.Group className="mb-3" controlId="formPassword">
+                <Form.Label>Password</Form.Label>
+                <InputGroup>
+                  <Form.Control
+                    type={passtype}
+                    placeholder="Password"
+                    ref={formPasswordRef}
+                    required
+                    onChange={(e) => setPassword({ val: e.target.value })}
+                  />
+                  <InputGroup.Text>
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon={passtype !== "password" ? faEyeSlash : faEye}
+                      onClick={() => {
+                        setPassType(
+                          passtype === "password" ? "text" : "password"
+                        );
+                      }}
+                    />
+                  </InputGroup.Text>
+                </InputGroup>
+              </Form.Group>
+            </Col>
+            <Col lg={true}>
+              <Form.Group className="mb-3" controlId="formRePassword">
+                <Form.Label>Re-type Password</Form.Label>
+                <InputGroup>
+                  <Form.Control
+                    type={passtype1}
+                    placeholder="Re-type password"
+                    ref={formRePasswordRef}
+                    pattern={password.val}
+                    focused={focused.toString()}
+                    required
+                  />
+                  <InputGroup.Text>
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon={passtype1 !== "password" ? faEyeSlash : faEye}
+                      onClick={() => {
+                        setPassType1(
+                          passtype1 === "password" ? "text" : "password"
+                        );
+                      }}
+                    />
+                  </InputGroup.Text>
+                </InputGroup>
+
+                <span className="newpass-error">{passwordMessage}</span>
+              </Form.Group>
+            </Col>
+
+            {error}
+            <Button
+                        style={{
+                          padding: "8px",
+                          borderRadius: "15px",
+                          backgroundColor: "#B3C5D7",
+                          width: "30%"
+                        }}
+                        variant="light"
+                        type="submit"
+                      >
+                        Submit
+                      </Button>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
+    </Container>
 
       {isLoading ? (
         <div className="loader-container">
