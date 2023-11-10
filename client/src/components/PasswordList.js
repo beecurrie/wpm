@@ -38,7 +38,12 @@ function PasswordList() {
   const formUsernameRef = useRef();
   const formPasswordRef = useRef();
   const formRePasswordRef = useRef();
-  const [error] = useState(null);
+
+  const formUrlRef = useRef();
+  const formRemarksRef = useRef();
+
+  const [error, setError] = useState(null);
+
   const [focused] = useState(false);
   const [passwordMessage] = useState("");
 
@@ -49,6 +54,7 @@ function PasswordList() {
 
   const [pwid, setPwId] = useState("");
   const [delshow, setDelShow] = useState(false);
+  const [pwidx, setPwIdx] = useState(null);
 
   useEffect(() => {
     const fetchPasswords = async () => {
@@ -89,10 +95,41 @@ function PasswordList() {
     handleDelClose();
   };
 
-  const handleClickEdit = (id) => {
+  const handleClickEdit = (id, idx) => {
     console.log("Clicked Edit button on ID: ", id);
     setShow(true);
+    setPwId(id);
+    setPwIdx(idx);
   };
+
+  async function submitHandler(e) {
+    e.preventDefault();
+
+    const enteredUsername = formUsernameRef.current.value;
+    const enteredPassword = formPasswordRef.current.value;
+    const enteredUrl = formUrlRef.current.value;
+    const enteredRemarks = formRemarksRef.current.value;
+
+    const formData = {
+      username: enteredUsername,
+      password: enteredPassword,
+      url: enteredUrl,
+      remarks: enteredRemarks,
+    };
+
+    try {
+      const response = await axios.patch(`/api/wpm/${pwid}`, formData); //use PATCH to update and pass on the object ID of the record to change: Gilberto/11-Nov-23
+      dispatch({ type: "UPDATE_PASSWORD", payload: [pwidx, response.data] }); //pass as payload the index of the array to update and the updated data as returned by the backend: Gilberto/11-Nov-23
+
+      console.log(response.data);
+
+      // navigate("/", { replace: true });
+    } catch (err) {
+      console.log(err);
+      setError(err.response.data.error);
+    }
+    setShow(false);
+  }
 
   const handleClickDelete = (id) => {
     console.log("ID to be deleted: ", id);
@@ -159,7 +196,7 @@ function PasswordList() {
                           cursor: "pointer",
                           float: "right",
                         }}
-                        onClick={() => handleClickEdit(pw._id)}
+                        onClick={() => handleClickEdit(pw._id, idx)} //pass back the Object ID of the record to update and the index of the array to update: Gilberto/11-Nov-23
                       />
                     </Card.Body>
                   </Card>
@@ -233,7 +270,7 @@ function PasswordList() {
             <Modal.Title>Edit Password</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit>
+            <Form onSubmit={submitHandler}>
               <Col lg={true}>
                 <Form.Group className="mb-3" controlId="formEmail">
                   <Form.Label>Username</Form.Label>
@@ -299,6 +336,28 @@ function PasswordList() {
 
                   <span className="newpass-error">{passwordMessage}</span>
                 </Form.Group>
+                <Col lg={true}>
+                  <Form.Group className="mb-3" controlId="formFirstname">
+                    <Form.Label>URL</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="url"
+                      ref={formUrlRef}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+                <Col lg={true}>
+                  <Form.Group className="mb-3" controlId="formLastname">
+                    <Form.Label>Remarks</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="remarks"
+                      ref={formRemarksRef}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
               </Col>
 
               {error}
@@ -308,6 +367,7 @@ function PasswordList() {
                   borderRadius: "15px",
                   backgroundColor: "#B3C5D7",
                   width: "30%",
+                  float: "right",
                 }}
                 variant="light"
                 type="submit"

@@ -160,23 +160,41 @@ const deletePwTrans = async (req, res) => {
 
 // update a password tranaction
 const updatePWTrans = async (req, res) => {
-  // console.log("req.body: ", req.body);
+  console.log("req.body: ", req.body);
   const { id } = req.params;
   const { username, password, url, remarks } = req.body;
+  console.log("ID: ", id);
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "No such password transaction" });
   }
-  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // const hashedPassword = await bcrypt.hash(password, 10);
+  // plain text
+  const plainText = password; //from client taken from req.body.password
+  const key = req.user.userkey;
+  // console.log("key: ", key);
+
+  // encryption algorithm
+  const algorithm = "aes-256-cbc";
+
+  // create a cipher object
+  const cipher = crypto.createCipher(algorithm, key);
+
+  // encrypt the plain text
+  let encrypted = cipher.update(plainText, "utf8", "hex");
+  encrypted += cipher.final("hex");
+  // console.log(encrypted);
+
   const pwtrans = await Passwords.findOneAndUpdate(
     {
       _id: id,
-      password: hashedPassword,
-      url,
-      remarks,
     },
+    { username, password: encrypted, url, remarks },
     { new: true }
   );
+  pwtrans.password = plainText; //return the plain text password as was passed here when the request to update was made
+  // console.log("pwtrans: ", pwtrans);
 
   if (!pwtrans) {
     return res.status(400).json({ error: "No such password transaction" });
@@ -377,7 +395,6 @@ const forgot_post = (req, res, next) => {
     ],
     function (err) {
       if (err) return next(err);
-      // res.redirect("/api/sos/forgot");
     }
   );
 };

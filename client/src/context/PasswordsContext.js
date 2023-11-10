@@ -13,16 +13,19 @@ export const passwordsReducer = (state, action) => {
         passwords: [action.payload, ...state.passwords],
       };
     case "UPDATE_PASSWORD":
+      // console.log("index:", action.payload[0]); //index of the array to change: Gilberto/11-Nov-23
+
+      const newPasswords = [...state.passwords];
+      newPasswords[action.payload[0]] = action.payload[1]; //returned object from backend: Gilberto/11-Nov-23
+
+      //console.log("new passwords: ", newPasswords); //the new passwords array to replace the current state variable passwords (state.passwords): Gilberto/11-Nov-23
       return {
-        passwords: [...state.passwords],
+        passwords: [...newPasswords], //update state variable passwords (state.passwords): Gilberto/11-Nov-23
       };
-    case "CLOSE_PASSWORD":
-      return {
-        passwords: [...state.passwords],
-      };
+
     case "DELETE_PASSWORD":
       return {
-        passwords: state.passwords.filter((pw) => pw._id !== action.payload),
+        passwords: state.passwords.filter((pw) => pw._id !== action.payload), //return the new array of passwords without the one that was deleted: Gilberto/11-Nov-23
       };
     case "SET_USERS":
       return {
