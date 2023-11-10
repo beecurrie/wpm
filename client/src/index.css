@@ -248,6 +248,13 @@ input:invalid[focused="true"] ~ span {
   transform: translateY(-50%);
 }
 
+/* New Password & Edit Password Pop-ups */
+
+
+.modal-content {
+  color: white;
+  background-color: #3b2113;
+}
 /* Breaking point to become mobile friendly */
 
 @media only screen and (max-width: 700px) {
