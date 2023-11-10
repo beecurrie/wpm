@@ -74,7 +74,6 @@ function PasswordList() {
     setShowPassword(!showPassword);
   };
 
-
   const handleDelClose = () => setDelShow(false);
   // const handleEditClose = () => setUndercons(false);
 
@@ -228,98 +227,98 @@ function PasswordList() {
         </Modal>
       </Container>
 
-      <Container>  
+      <Container>
         <Modal className="edit-pass-modal" show={editshow} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Password</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit>
-            <Col lg={true}>
-              <Form.Group className="mb-3" controlId="formEmail">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="username"
-                  ref={formUsernameRef}
-                  required
-                  focused={focused.toString()}
-                />
-                <span className="newpass-error">{passwordMessage}</span>
-              </Form.Group>
-            </Col>
-            <Col lg={true}>
-              <Form.Group className="mb-3" controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <InputGroup>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Password</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit>
+              <Col lg={true}>
+                <Form.Group className="mb-3" controlId="formEmail">
+                  <Form.Label>Username</Form.Label>
                   <Form.Control
-                    type={passtype}
-                    placeholder="Password"
-                    ref={formPasswordRef}
+                    type="text"
+                    placeholder="username"
+                    ref={formUsernameRef}
                     required
-                    onChange={(e) => setPassword({ val: e.target.value })}
-                  />
-                  <InputGroup.Text>
-                    <FontAwesomeIcon
-                      style={{ cursor: "pointer" }}
-                      icon={passtype !== "password" ? faEyeSlash : faEye}
-                      onClick={() => {
-                        setPassType(
-                          passtype === "password" ? "text" : "password"
-                        );
-                      }}
-                    />
-                  </InputGroup.Text>
-                </InputGroup>
-              </Form.Group>
-            </Col>
-            <Col lg={true}>
-              <Form.Group className="mb-3" controlId="formRePassword">
-                <Form.Label>Re-type Password</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    type={passtype1}
-                    placeholder="Re-type password"
-                    ref={formRePasswordRef}
-                    pattern={password.val}
                     focused={focused.toString()}
-                    required
                   />
-                  <InputGroup.Text>
-                    <FontAwesomeIcon
-                      style={{ cursor: "pointer" }}
-                      icon={passtype1 !== "password" ? faEyeSlash : faEye}
-                      onClick={() => {
-                        setPassType1(
-                          passtype1 === "password" ? "text" : "password"
-                        );
-                      }}
+                  <span className="newpass-error">{passwordMessage}</span>
+                </Form.Group>
+              </Col>
+              <Col lg={true}>
+                <Form.Group className="mb-3" controlId="formPassword">
+                  <Form.Label>Password</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type={passtype}
+                      placeholder="Password"
+                      ref={formPasswordRef}
+                      required
+                      onChange={(e) => setPassword({ val: e.target.value })}
                     />
-                  </InputGroup.Text>
-                </InputGroup>
-
-                <span className="newpass-error">{passwordMessage}</span>
-              </Form.Group>
-            </Col>
-
-            {error}
-            <Button
-                        style={{
-                          padding: "8px",
-                          borderRadius: "15px",
-                          backgroundColor: "#B3C5D7",
-                          width: "30%"
+                    <InputGroup.Text>
+                      <FontAwesomeIcon
+                        style={{ cursor: "pointer" }}
+                        icon={passtype !== "password" ? faEyeSlash : faEye}
+                        onClick={() => {
+                          setPassType(
+                            passtype === "password" ? "text" : "password"
+                          );
                         }}
-                        variant="light"
-                        type="submit"
-                      >
-                        Submit
-                      </Button>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
-    </Container>
+                      />
+                    </InputGroup.Text>
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+              <Col lg={true}>
+                <Form.Group className="mb-3" controlId="formRePassword">
+                  <Form.Label>Re-type Password</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type={passtype1}
+                      placeholder="Re-type password"
+                      ref={formRePasswordRef}
+                      pattern={password.val}
+                      focused={focused.toString()}
+                      required
+                    />
+                    <InputGroup.Text>
+                      <FontAwesomeIcon
+                        style={{ cursor: "pointer" }}
+                        icon={passtype1 !== "password" ? faEyeSlash : faEye}
+                        onClick={() => {
+                          setPassType1(
+                            passtype1 === "password" ? "text" : "password"
+                          );
+                        }}
+                      />
+                    </InputGroup.Text>
+                  </InputGroup>
+
+                  <span className="newpass-error">{passwordMessage}</span>
+                </Form.Group>
+              </Col>
+
+              {error}
+              <Button
+                style={{
+                  padding: "8px",
+                  borderRadius: "15px",
+                  backgroundColor: "#B3C5D7",
+                  width: "30%",
+                }}
+                variant="light"
+                type="submit"
+              >
+                Submit
+              </Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Modal>
+      </Container>
 
       {isLoading ? (
         <div className="loader-container">
