@@ -31,7 +31,7 @@ const randomColor = () => {
   const B = Math.floor(Math.random() * 255);
 
   const color = `#${rgbConvert(R)}${rgbConvert(G)}${rgbConvert(B)}`;
-  console.log(color);
+  // console.log(color);
 
   return color;
 };

@@ -43,7 +43,7 @@ const savePhotoDb = async (req, res, next) => {
     chunkSizeBytes: 1024,
     bucketName: "wpmdocs",
   });
-  console.log("Filename being uploaded: ", req.file.originalname);
+  // console.log("Filename being uploaded: ", req.file.originalname);
   // shrink image before uploading to MongoDb --> 23-May-23
   const fname = `public/images/wpm-${Date.now()}-${req.file.originalname}`; //file to contain the sharpened image
 
@@ -94,7 +94,7 @@ router.post(
 //Successful login
 router.get("/login-success", (req, res, next) => {
   console.log("Login success");
-  console.log("user: ", req.user);
+  // console.log("user: ", req.user);
   const user = {
     id: req.user._id,
     email: req.user.email,
@@ -152,7 +152,7 @@ router.post(
 router.get("/user/:id", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.params.id });
-    console.log(user);
+    // console.log(user);
     res.json({ duplicate: user ? true : false });
   } catch (error) {
     console.log(error);

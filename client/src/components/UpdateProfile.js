@@ -50,7 +50,7 @@ export default function UpdateProfile({
     const enteredLastname = formLastnameRef.current.value;
     const enteredFirstname = formFirstnameRef.current.value;
 
-    console.log("File: ", file);
+    // console.log("File: ", file);
 
     //Create Formdata - did this due to the addition of file in the submission of data
     const formData = new FormData();

@@ -84,11 +84,11 @@ function PasswordList() {
   // const handleEditClose = () => setUndercons(false);
 
   const handleDelConfirm = async () => {
-    console.log("Clicked Confirm Delete button");
+    // console.log("Clicked Confirm Delete button");
     try {
       const response = await axios.delete(`/api/wpm/${pwid}`);
       dispatch({ type: "DELETE_PASSWORD", payload: pwid });
-      console.log(response);
+      // console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -96,7 +96,7 @@ function PasswordList() {
   };
 
   const handleClickEdit = (id, idx) => {
-    console.log("Clicked Edit button on ID: ", id);
+    // console.log("Clicked Edit button on ID: ", id);
     setShow(true);
     setPwId(id);
     setPwIdx(idx);
@@ -121,7 +121,7 @@ function PasswordList() {
       const response = await axios.patch(`/api/wpm/${pwid}`, formData); //use PATCH to update and pass on the object ID of the record to change: Gilberto/11-Nov-23
       dispatch({ type: "UPDATE_PASSWORD", payload: [pwidx, response.data] }); //pass as payload the index of the array to update and the updated data as returned by the backend: Gilberto/11-Nov-23
 
-      console.log(response.data);
+      // console.log(response.data);
 
       // navigate("/", { replace: true });
     } catch (err) {
@@ -132,7 +132,7 @@ function PasswordList() {
   }
 
   const handleClickDelete = (id) => {
-    console.log("ID to be deleted: ", id);
+    // console.log("ID to be deleted: ", id);
     setDelShow(true);
     setPwId(id);
   };

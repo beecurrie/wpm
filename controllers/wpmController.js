@@ -160,10 +160,10 @@ const deletePwTrans = async (req, res) => {
 
 // update a password tranaction
 const updatePWTrans = async (req, res) => {
-  console.log("req.body: ", req.body);
+  // console.log("req.body: ", req.body);
   const { id } = req.params;
   const { username, password, url, remarks } = req.body;
-  console.log("ID: ", id);
+  // console.log("ID: ", id);
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "No such password transaction" });

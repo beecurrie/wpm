@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const isAuth = () => {
   //this function will get user's login status
-  return localStorage.getItem("auth") == "true";
+  return localStorage.getItem("auth") === "true";
 };
 
 const ProtectedRoutes = () => {

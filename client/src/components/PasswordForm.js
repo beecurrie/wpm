@@ -73,7 +73,7 @@ function PasswordForm() {
       const response = await axios.post("/api/wpm", formData);
       dispatch({ type: "CREATE_PASSWORD", payload: response.data }); //now using 'dispatch' for global state management -- 19-Oct-23
 
-      console.log(response.data);
+      // console.log(response.data);
 
       // navigate("/", { replace: true });
     } catch (err) {

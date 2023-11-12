@@ -64,7 +64,7 @@ export default function RegisterForm() {
       setFocused(true);
       setPasswordMessage("Passwords don't match!");
 
-      console.log("password mismatch");
+      // console.log("password mismatch");
     } else {
       e.target.setCustomValidity(""); //restores :valid pseudo CSS
       setPasswordMessage("");
