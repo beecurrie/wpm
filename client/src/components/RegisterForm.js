@@ -257,7 +257,7 @@ export default function RegisterForm() {
                 <Col lg={filepreview ? 10 : 12}>
                   <Form.Group controlId="formFile" className="mb-3 text-white">
                     <Form.Label>Upload Photo</Form.Label>
-                    <Form.Control type="file" onChange={onChange} />
+                    <Form.Control type="file" onChange={onChange} required />
                   </Form.Group>
                 </Col>
 
