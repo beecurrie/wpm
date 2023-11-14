@@ -59,13 +59,13 @@ export default function ForgotPassword() {
 
     const enteredEmail = formEmailRef.current.value;
     setEmail(enteredEmail);
-    console.log(enteredEmail);
+    // console.log(enteredEmail);
 
     try {
       const response = await axios.post("/api/wpm/forgot", {
         email: enteredEmail,
       });
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data.valid) {
         setVerifyCode(true);
         setErrorMessage("Please check your email. Verification code sent.");
@@ -82,11 +82,11 @@ export default function ForgotPassword() {
     e.preventDefault();
 
     const enteredCode = formVerifyCodeRef.current.value;
-    console.log(enteredCode);
+    // console.log(enteredCode);
 
     try {
       const response = await axios.get("/api/wpm/reset/" + enteredCode);
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data.token === enteredCode) {
         setIsVerified(true);
         setErrorMessage("Reset password verified. Enter new password.");
@@ -105,7 +105,7 @@ export default function ForgotPassword() {
 
     // const enteredEmail = JSON.parse(localStorage.getItem("user")).email;
     const enteredPassword = formPasswordRef.current.value;
-    console.log("Hey!", email);
+    // console.log("Hey!", email);
 
     try {
       await axios.post("/api/wpm/resetpwd", {
@@ -251,7 +251,6 @@ export default function ForgotPassword() {
                             type={passtype1}
                             placeholder="Password"
                             ref={formRePasswordRef}
-                            pattern={password}
                             onBlur={checkPassword}
                             focused={focused.toString()}
                             required

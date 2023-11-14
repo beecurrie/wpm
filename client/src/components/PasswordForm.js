@@ -164,7 +164,6 @@ function PasswordForm() {
                     type={passtype1}
                     placeholder="Re-type password"
                     ref={formRePasswordRef}
-                    pattern={password.val}
                     onBlur={checkPassword}
                     focused={focused.toString()}
                     required

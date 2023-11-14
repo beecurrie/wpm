@@ -317,7 +317,6 @@ function PasswordList() {
                       type={passtype1}
                       placeholder="Re-type password"
                       ref={formRePasswordRef}
-                      pattern={password.val}
                       focused={focused.toString()}
                       required
                     />

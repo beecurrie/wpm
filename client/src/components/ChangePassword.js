@@ -49,7 +49,7 @@ export default function ChangePassword() {
   };
 
   const checkOldPassword = async (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const enteredEmail = JSON.parse(localStorage.getItem("user")).email;
     const enteredOldPassword = e.target.value;
 
@@ -166,7 +166,6 @@ export default function ChangePassword() {
                         type={passtype2}
                         placeholder="Re-type password"
                         ref={formRePasswordRef}
-                        pattern={password}
                         onBlur={checkPassword}
                         focused={focused.toString()}
                         required

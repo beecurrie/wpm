@@ -34,6 +34,7 @@ export default function RegisterForm() {
   const [focused, setFocused] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [strengthMessage, setStrengthMessage] = useState("");
   const [password, setPassword] = useState("");
 
   const [passtype, setPassType] = useState("password");
@@ -55,6 +56,24 @@ export default function RegisterForm() {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const checkPasswordStrength = (e) => {
+    const validPasswordRegEx =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (e.target.value.match(validPasswordRegEx)) {
+      e.target.setCustomValidity(""); //forcefully set the :invalid pseudo CSS
+      setStrengthMessage("");
+      setFocused(false);
+    } else {
+      e.target.setCustomValidity(
+        "Must be at least 8 characters (1-lowercase letter, 1-uppercase letter, 1-numeric digit and 1-special character [!@#$%^&*]"
+      ); //forcefully set the :invalid pseudo CSS
+      setFocused(true);
+      setStrengthMessage(
+        "Must be at least 8 characters (1-lowercase letter, 1-uppercase letter, 1-numeric digit and 1-special character [!@#$%^&*]"
+      );
     }
   };
 
@@ -176,19 +195,19 @@ export default function RegisterForm() {
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3 text-white" controlId="formLastname">
+              <Form.Group className="mb-3 text-white" controlId="formPassword">
                 <Form.Label>Password</Form.Label>
-                <InputGroup
-                  className="mb-3 text-white"
-                  controlId="formPassword"
-                >
+                <InputGroup>
                   <Form.Control
                     type={passtype}
                     placeholder="Password"
                     ref={formPasswordRef}
                     required
                     onChange={(e) => setPassword({ val: e.target.value })}
+                    onBlur={checkPasswordStrength}
+                    focused={focused.toString()}
                   />
+
                   <InputGroup.Text>
                     <FontAwesomeIcon
                       style={{ cursor: "pointer" }}
@@ -201,6 +220,7 @@ export default function RegisterForm() {
                     />
                   </InputGroup.Text>
                 </InputGroup>
+                <span className="spanerror">{strengthMessage}</span>
               </Form.Group>
 
               <Form.Group
@@ -213,7 +233,6 @@ export default function RegisterForm() {
                     type={passtype1}
                     placeholder="Re-type password"
                     ref={formRePasswordRef}
-                    pattern={password.val}
                     onBlur={checkPassword}
                     focused={focused.toString()}
                     required
