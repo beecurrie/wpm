@@ -1,3 +1,5 @@
+//This is the database model for recording the various password accounts of the user
+
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;

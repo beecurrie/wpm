@@ -1,3 +1,5 @@
+//This is the routing service file. All the API routes are defined here
+
 const express = require("express");
 const router = express.Router();
 
@@ -34,6 +36,7 @@ const {
   checkPassword,
 } = require("../controllers/wpmController");
 
+//define storage for the photo uploads
 const storage = multer.memoryStorage(); //this is a good way to minimize file saving into the disk - just save it into memory as a buffer
 const upload = multer({ storage });
 
@@ -44,7 +47,7 @@ const savePhotoDb = async (req, res, next) => {
     bucketName: "wpmdocs",
   });
   // console.log("Filename being uploaded: ", req.file.originalname);
-  // shrink image before uploading to MongoDb --> 23-May-23
+  // shrink image before uploading to MongoDb
   const fname = `public/images/wpm-${Date.now()}-${req.file.originalname}`; //file to contain the sharpened image
 
   try {
@@ -58,7 +61,7 @@ const savePhotoDb = async (req, res, next) => {
     throw error;
   }
 
-  //now, save to mongoDB database the photo - 23-May-23
+  //now, save to mongoDB database the photo
   fs.createReadStream(fname)
     .pipe(gridFSBucket.openUploadStream(fname.slice(14, fname.length))) //up to the filename part ('sos-req.file.filename')
     .on("error", () => {
@@ -137,7 +140,7 @@ router.post("/resetpwd", resetPassword);
 router.get("/allusers", isAuth, getUsers);
 
 //Register a new user
-router.post("/register", upload.single("file"), savePhotoDb, createUser);
+router.post("/register", upload.single("file"), savePhotoDb, createUser); //Notice the middleware to upload the file to MongoDb
 
 //Update user profile information
 router.post(

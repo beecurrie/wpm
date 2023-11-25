@@ -1,3 +1,5 @@
+//This is the main file to run the backend server of the whole application
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -77,7 +79,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//Forced HTTPS: 18-June-23
+//Forced HTTPS
 app.use((req, res, next) => {
   if (!process.env.NODE_ENV == "development") {
     if (req.headers["x-forwarded-proto"] !== "https") {
@@ -102,6 +104,8 @@ mongoose
   .connect(DB_URI)
   .then(() => {
     console.log(`connected to database ${DB_LOCATION}`);
+
+    //The following code is for the building the client side during the production stage
     if (process.env.NODE_ENV === "production") {
       // Step 1:
       app.use(express.static(path.resolve(__dirname, "./client/build")));
@@ -112,7 +116,8 @@ mongoose
         );
       });
     }
-    // listen to port
+
+    // Port where this app listens
     app.listen(process.env.PORT, () => {
       console.log("listening for requests on port", process.env.PORT);
     });

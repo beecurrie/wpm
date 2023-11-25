@@ -1,3 +1,5 @@
+//This is the main controller file. Contained herein are the controller functions for all the defined routes
+
 const moment = require("moment");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
@@ -26,12 +28,12 @@ const createToken = (_id, email, lastname, firstname) => {
  * -------------- OBSERVATION CONTROLLERS ----------------
  */
 
-// get all password list
-
+// Get all password list
 const getPasswords = async (req, res) => {
   const { id } = req.params;
   const passwords = await Passwords.find({ owner: id }).sort({ createdAt: -1 });
 
+  //Function to decrypt the passwords of the various accounts recorded by the user
   const decryptedList = passwords.map((pw) => {
     // encryption key
     // const key = req.user.password; //removed: 04-Nov-2023. Now using 'userkey' field
@@ -141,7 +143,7 @@ const createPWTrans = async (req, res) => {
   }
 };
 
-// delete a password transaction
+// Delete a password transaction
 const deletePwTrans = async (req, res) => {
   const { id } = req.params;
 
@@ -158,7 +160,7 @@ const deletePwTrans = async (req, res) => {
   res.status(200).json(pwtrans);
 };
 
-// update a password tranaction
+// Update a password tranaction
 const updatePWTrans = async (req, res) => {
   // console.log("req.body: ", req.body);
   const { id } = req.params;

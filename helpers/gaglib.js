@@ -1,6 +1,8 @@
+//This is my own library of helper functions
+
 const nodemailer = require("nodemailer");
 
-//Modules for exports from here downwards
+//Sendmail function - used when sending email to users
 module.exports = {
   sendMail: (recvr, subject, emailbody, fileAttachment, filepath) => {
     const filePath =

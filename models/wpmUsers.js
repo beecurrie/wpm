@@ -1,3 +1,5 @@
+//This is the database model for recording the users of the application
+
 const mongoose = require("mongoose");
 const brcrypt = require("bcrypt");
 const validator = require("validator");
@@ -34,6 +36,7 @@ const wpmUserSchema = new Schema(
   { timestamps: true }
 );
 
+//Static method for signing up a user
 wpmUserSchema.statics.signup = async function (
   email,
   password,
@@ -48,11 +51,6 @@ wpmUserSchema.statics.signup = async function (
   if (!validator.isEmail(email)) {
     throw Error("Email is not valid");
   }
-
-  //i'll activate this validator once all the testing done - GAG: 21-Oct-2023
-  // if (!validator.isStrongPassword(password)) {
-  //   throw Error("Password not strong enough");
-  // }
 
   const exists = await this.findOne({ email });
   if (exists) {
@@ -74,7 +72,7 @@ wpmUserSchema.statics.signup = async function (
   return user;
 };
 
-//static login method
+//Static method to login
 wpmUserSchema.statics.login = async function (email, password) {
   if (!email || !password) {
     throw Error("All fields must be filled");
